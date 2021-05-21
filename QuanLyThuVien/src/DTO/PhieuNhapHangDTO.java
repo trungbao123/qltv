@@ -10,18 +10,19 @@ package DTO;
  * @author Vy
  */
 public class PhieuNhapHangDTO {
+
     private String maPNH;
     private String nv;
     private String ncc;
     private String ngayPH;
     private int tongtien;
-    
-    public PhieuNhapHangDTO(){
-        maPNH=null;
-        nv=null;
-        ncc=null;
-        ngayPH=null;
-        tongtien=0;
+
+    public PhieuNhapHangDTO() {
+        maPNH = null;
+        nv = null;
+        ncc = null;
+        ngayPH = null;
+        tongtien = 0;
     }
 
     public PhieuNhapHangDTO(String maPNH, String nv, String ncc, String ngayPH, int tongtien) {
@@ -29,7 +30,7 @@ public class PhieuNhapHangDTO {
         this.nv = nv;
         this.ncc = ncc;
         this.ngayPH = ngayPH;
-        this.tongtien=tongtien;
+        this.tongtien = tongtien;
     }
 
     public String getMaPNH() {
@@ -71,5 +72,5 @@ public class PhieuNhapHangDTO {
     public void setTongtien(int tongtien) {
         this.tongtien = tongtien;
     }
-    
+
 }

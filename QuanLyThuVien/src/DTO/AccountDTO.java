@@ -10,12 +10,13 @@ package DTO;
  * @author Lộc
  */
 public class AccountDTO {
+
     private String username;
     private String password;
-    
-    public AccountDTO(){
-        username=null;
-        password=null;
+
+    public AccountDTO() {
+        username = null;
+        password = null;
     }
 
     public AccountDTO(String username, String password) {
@@ -38,5 +39,5 @@ public class AccountDTO {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
 }

@@ -1,33 +1,23 @@
-
 package GUI;
+
 import DTO.DocGiaDTO;
 import BUS.DocGiaBUS;
-import DAO.DocGiaDAO;
-import DAO.DAO;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.LayoutManager;
-import java.awt.RenderingHints;
-import java.awt.event.KeyEvent;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
+
 public class QuanLyDocGia extends javax.swing.JFrame {
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
     private DefaultTableModel modelDocGia = new DefaultTableModel();
     private DefaultTableModel resOfSearch;
-    private int EditOrSearch=1;
-    private DocGiaBUS docgiabus=new DocGiaBUS();
+    private int EditOrSearch = 1;
+    private DocGiaBUS docgiabus = new DocGiaBUS();
+
     /**
      * Creates new form QuanLyDocGia
      */
@@ -550,24 +540,24 @@ public class QuanLyDocGia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimActionPerformed
-       
+
     }//GEN-LAST:event_btTimActionPerformed
 
     private void btTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTatCaActionPerformed
-     
+
     }//GEN-LAST:event_btTatCaActionPerformed
 
     private void btTaoMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaoMoiActionPerformed
-       
+
     }//GEN-LAST:event_btTaoMoiActionPerformed
 
     private void cbTDDGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTDDGActionPerformed
-    String selectedItem = (String) cbTDDG.getSelectedItem();
+        String selectedItem = (String) cbTDDG.getSelectedItem();
     }//GEN-LAST:event_cbTDDGActionPerformed
 
     private void btHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyActionPerformed
         // TODO add your handling code here:
-        if(EditOrSearch==1){
+        if (EditOrSearch == 1) {
             txMaDG.setEditable(true);
             tbDocGia.setEnabled(true);
             btThem.setEnabled(true);
@@ -576,11 +566,10 @@ public class QuanLyDocGia extends javax.swing.JFrame {
             btTatCa1.setEnabled(true);
             btXacNhan.setVisible(false);
             btHuy.setVisible(false);
-        }
-        else{
+        } else {
             txMaDG.setEditable(true);
             tbDocGia.setEnabled(true);
-            btThem.setEnabled(true);         
+            btThem.setEnabled(true);
             btTim.setEnabled(true);
             btTatCa.setEnabled(true);
             btXacNhan.setVisible(false);
@@ -605,15 +594,19 @@ public class QuanLyDocGia extends javax.swing.JFrame {
             txHoDG.setText(docgia.getHoDocGia());
             txTenDG.setText(docgia.getTenDocGia());
             txNSDG.setText(docgia.getNgaysinh());
-            if(docgia.getGioiTinh()==1){
+            if (docgia.getGioiTinh() == 1) {
                 txGTDG.setText("Nam");
-            } else txGTDG.setText("Nữ");
+            } else {
+                txGTDG.setText("Nữ");
+            }
             txDCDG.setText(docgia.getDiachi());
             txDTDG.setText(docgia.getDienthoai());
             txNNDG.setText(docgia.getNghenghiep());
-            for(int j=0;j<cbTDDG.getItemCount();j++)
-            if(cbTDDG.getItemAt(j).equals(docgia.getTrinhdo()))
-            cbTDDG.setSelectedIndex(j);
+            for (int j = 0; j < cbTDDG.getItemCount(); j++) {
+                if (cbTDDG.getItemAt(j).equals(docgia.getTrinhdo())) {
+                    cbTDDG.setSelectedIndex(j);
+                }
+            }
         }
     }//GEN-LAST:event_tbDocGiaMouseClicked
 
@@ -624,8 +617,9 @@ public class QuanLyDocGia extends javax.swing.JFrame {
 
     private void btTaoMoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaoMoi1ActionPerformed
         // TODO add your handling code here:
-        if(tbDocGia.isEnabled())
-        txMaDG.setText("");
+        if (tbDocGia.isEnabled()) {
+            txMaDG.setText("");
+        }
         txHoDG.setText("");
         txTenDG.setText("");
         txNSDG.setText("");
@@ -633,13 +627,14 @@ public class QuanLyDocGia extends javax.swing.JFrame {
         txDTDG.setText("");
         txNNDG.setText("");
         cbTDDG.setSelectedIndex(0);
-        
+
     }//GEN-LAST:event_btTaoMoi1ActionPerformed
 
     private void btTatCa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTatCa1ActionPerformed
         // TODO add your handling code here:
-        if (docgiabus.getList().size()>0)
-        tbDocGia.setModel(modelDocGia);
+        if (docgiabus.getList().size() > 0) {
+            tbDocGia.setModel(modelDocGia);
+        }
     }//GEN-LAST:event_btTatCa1ActionPerformed
 
     private void btTim1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTim1ActionPerformed
@@ -648,12 +643,12 @@ public class QuanLyDocGia extends javax.swing.JFrame {
     }//GEN-LAST:event_btTim1ActionPerformed
 
     private void btSua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSua1ActionPerformed
-        int i=tbDocGia.getSelectedRow();
-        if(i<0){
+        int i = tbDocGia.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chọn độc giả cần chỉnh sửa", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        EditOrSearch=1;
+        EditOrSearch = 1;
         txMaDG.setEditable(false);
         tbDocGia.setEnabled(false);
         btThem.setEnabled(false);
@@ -666,19 +661,20 @@ public class QuanLyDocGia extends javax.swing.JFrame {
     }//GEN-LAST:event_btSua1ActionPerformed
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
-        if(!ValidateThemDocGia())
-        return;
+        if (!ValidateThemDocGia()) {
+            return;
+        }
 
-        DocGiaDTO docgia=new DocGiaDTO();
+        DocGiaDTO docgia = new DocGiaDTO();
         docgia.setMaDocGia(txMaDG.getText());
         docgia.setHoDocGia(txHoDG.getText());
         docgia.setTenDocGia(txTenDG.getText());
         docgia.setNgaysinh(txNSDG.getText());
-        if(txGTDG.getText().equals("Nam")){
-               docgia.setGioiTinh(1);
-            } else if(txGTDG.getText().equals("Nữ")){ 
-                docgia.setGioiTinh(0);
-            }
+        if (txGTDG.getText().equals("Nam")) {
+            docgia.setGioiTinh(1);
+        } else if (txGTDG.getText().equals("Nữ")) {
+            docgia.setGioiTinh(0);
+        }
         docgia.setDienthoai(txDTDG.getText());
         docgia.setDiachi(txDCDG.getText());
         docgia.setNghenghiep(txNNDG.getText());
@@ -690,14 +686,16 @@ public class QuanLyDocGia extends javax.swing.JFrame {
             Logger.getLogger(QuanLyDocGia.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Vector row=new Vector();
+        Vector row = new Vector();
         row.add(docgia.getMaDocGia());
         row.add(docgia.getHoDocGia());
         row.add(docgia.getTenDocGia());
         row.add(docgia.getNgaysinh());
-        if(docgia.getGioiTinh()==1){
+        if (docgia.getGioiTinh() == 1) {
             row.add("Nam");
-        } else row.add("Nữ");              
+        } else {
+            row.add("Nữ");
+        }
         row.add(docgia.getDienthoai());
         row.add(docgia.getDiachi());
         row.add(docgia.getNghenghiep());
@@ -744,18 +742,20 @@ public class QuanLyDocGia extends javax.swing.JFrame {
         int i = tbDocGia.getSelectedRow();
         DocGiaDTO docgia = new DocGiaDTO();
         docgia = docgiabus.getList().get(i);
-        if(docgiabus.getList().size()>0){
+        if (docgiabus.getList().size() > 0) {
             try {
-                docgiabus.Remove(docgiabus .getList().get(i).getMaDocGia());
+                docgiabus.Remove(docgiabus.getList().get(i).getMaDocGia());
             } catch (Exception ex) {
                 Logger.getLogger(QuanLyDocGia.class.getName()).log(Level.SEVERE, null, ex);
             }
             modelDocGia.removeRow(i);
             tbDocGia.setModel(modelDocGia);
             txGTDG.setText("");
-            if(docgia.getGioiTinh()==1){
+            if (docgia.getGioiTinh() == 1) {
                 txGTDG.setText("Nam");
-            } else txGTDG.setText("Nữ");
+            } else {
+                txGTDG.setText("Nữ");
+            }
             txMaDG.setText("");
             txHoDG.setText("");
             txTenDG.setText("");
@@ -766,33 +766,37 @@ public class QuanLyDocGia extends javax.swing.JFrame {
             cbTDDG.setSelectedIndex(0);
         }
     }//GEN-LAST:event_btXoa1ActionPerformed
-    public void List() throws Exception{
-        if(docgiabus.getList()==null)
+    public void List() throws Exception {
+        if (docgiabus.getList() == null) {
             docgiabus.listDocGia();
-        ArrayList<DocGiaDTO> listMS= docgiabus.getList();
-        Vector header=new Vector();
-            header.add("Mã Đọc Giả");
-            header.add("Họ Lót");
-            header.add("Tên");
-            header.add("Ngày Sinh");
-            header.add("Giới Tính");
-            header.add("Điện Thoại");
-            header.add("Địa Chỉ");
-            header.add("Nghề Nghiệp");
-            header.add("Trình Độ");
-            
-        if (modelDocGia.getRowCount() == 0) 
-                modelDocGia = new DefaultTableModel(header, 0);
-        for(DocGiaDTO dg: listMS) {
-            Vector row=new Vector();
+        }
+        ArrayList<DocGiaDTO> listMS = docgiabus.getList();
+        Vector header = new Vector();
+        header.add("Mã Đọc Giả");
+        header.add("Họ Lót");
+        header.add("Tên");
+        header.add("Ngày Sinh");
+        header.add("Giới Tính");
+        header.add("Điện Thoại");
+        header.add("Địa Chỉ");
+        header.add("Nghề Nghiệp");
+        header.add("Trình Độ");
+
+        if (modelDocGia.getRowCount() == 0) {
+            modelDocGia = new DefaultTableModel(header, 0);
+        }
+        for (DocGiaDTO dg : listMS) {
+            Vector row = new Vector();
             row.add(dg.getMaDocGia());
             row.add(dg.getHoDocGia());
             row.add(dg.getTenDocGia());
             row.add(dg.getNgaysinh());
-            if(dg.getGioiTinh()==1){
-               row.add("Nam");
-            } else row.add("Nữ");
-           
+            if (dg.getGioiTinh() == 1) {
+                row.add("Nam");
+            } else {
+                row.add("Nữ");
+            }
+
             row.add(dg.getDienthoai());
             row.add(dg.getDiachi());
             row.add(dg.getNghenghiep());
@@ -801,18 +805,19 @@ public class QuanLyDocGia extends javax.swing.JFrame {
         }
         tbDocGia.setModel(modelDocGia);
     }
-    private void Edit(){
-        int i=tbDocGia.getSelectedRow();
-        if(docgiabus.getList().size()>0){
-            DocGiaDTO dg=new DocGiaDTO();
+
+    private void Edit() {
+        int i = tbDocGia.getSelectedRow();
+        if (docgiabus.getList().size() > 0) {
+            DocGiaDTO dg = new DocGiaDTO();
 
             dg.setMaDocGia(txMaDG.getText());
             dg.setHoDocGia(txHoDG.getText());
             dg.setTenDocGia(txTenDG.getText());
             dg.setNgaysinh(txNSDG.getText());
-            if(txGTDG.getText().equals("Nam")){
-               dg.setGioiTinh(1);
-            } else if(txGTDG.getText().equals("Nữ")){ 
+            if (txGTDG.getText().equals("Nam")) {
+                dg.setGioiTinh(1);
+            } else if (txGTDG.getText().equals("Nữ")) {
                 dg.setGioiTinh(0);
             }
             dg.setDienthoai(txDTDG.getText());
@@ -830,10 +835,12 @@ public class QuanLyDocGia extends javax.swing.JFrame {
             modelDocGia.setValueAt(dg.getHoDocGia(), i, 1);
             modelDocGia.setValueAt(dg.getTenDocGia(), i, 2);
             modelDocGia.setValueAt(dg.getNgaysinh(), i, 3);
-            if(dg.getGioiTinh()==1){
+            if (dg.getGioiTinh() == 1) {
                 modelDocGia.setValueAt("Nam", i, 4);
-            } else modelDocGia.setValueAt("Nữ", i, 4);
-            
+            } else {
+                modelDocGia.setValueAt("Nữ", i, 4);
+            }
+
             modelDocGia.setValueAt(dg.getDienthoai(), i, 5);
             modelDocGia.setValueAt(dg.getDiachi(), i, 6);
             modelDocGia.setValueAt(dg.getNghenghiep(), i, 7);
@@ -852,37 +859,41 @@ public class QuanLyDocGia extends javax.swing.JFrame {
         btXacNhan.setVisible(false);
         btHuy.setVisible(false);
     }
-    private void Search(){
-        if(docgiabus.getList().isEmpty()){
+
+    private void Search() {
+        if (docgiabus.getList().isEmpty()) {
             return;
         }
 
         String MaDocGia, HoDocGia, TenDocGia, Ngaysinh, Diachi, Dienthoai, Nghenghiep, Trinhdo = null;
         int GioiTinh;
-        MaDocGia=txMaDG.getText();
-        HoDocGia=txHoDG.getText();
-        TenDocGia=txTenDG.getText();
-        Ngaysinh=txNSDG.getText();
-        if(txGTDG.getText().equals("Nam")){
-            GioiTinh=1;
-        } else  if(txGTDG.getText().equals("Nữ")){
-            GioiTinh=0;} else GioiTinh=-1;
-        Diachi=txDCDG.getText();
-        Dienthoai=txDTDG.getText();
-        Nghenghiep=txNNDG.getText();
+        MaDocGia = txMaDG.getText();
+        HoDocGia = txHoDG.getText();
+        TenDocGia = txTenDG.getText();
+        Ngaysinh = txNSDG.getText();
+        if (txGTDG.getText().equals("Nam")) {
+            GioiTinh = 1;
+        } else if (txGTDG.getText().equals("Nữ")) {
+            GioiTinh = 0;
+        } else {
+            GioiTinh = -1;
+        }
+        Diachi = txDCDG.getText();
+        Dienthoai = txDTDG.getText();
+        Nghenghiep = txNNDG.getText();
         Trinhdo = cbTDDG.getSelectedItem().toString();
         System.out.print(Trinhdo);
 
-        ArrayList<DocGiaDTO> res=new ArrayList<DocGiaDTO>();
+        ArrayList<DocGiaDTO> res = new ArrayList<DocGiaDTO>();
         try {
-            res=docgiabus.Search(MaDocGia, HoDocGia, TenDocGia, Ngaysinh, GioiTinh, Dienthoai, Diachi, Nghenghiep, Trinhdo);
+            res = docgiabus.Search(MaDocGia, HoDocGia, TenDocGia, Ngaysinh, GioiTinh, Dienthoai, Diachi, Nghenghiep, Trinhdo);
         } catch (Exception ex) {
             Logger.getLogger(QuanLyDocGia.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (res.size()==0)
+        if (res.size() == 0) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        } else {
             Vector header = new Vector();
             header.add("Mã Đọc Giả");
             header.add("Họ Lót");
@@ -894,16 +905,18 @@ public class QuanLyDocGia extends javax.swing.JFrame {
             header.add("Nghề Nghiệp");
             header.add("Trình Độ");
             resOfSearch = new DefaultTableModel(header, 0);
-            for(DocGiaDTO d: res){
-                Vector row=new Vector();
+            for (DocGiaDTO d : res) {
+                Vector row = new Vector();
                 row.add(d.getMaDocGia());
                 row.add(d.getHoDocGia());
                 row.add(d.getTenDocGia());
                 row.add(d.getNgaysinh());
-                if(d.getGioiTinh()==1){
+                if (d.getGioiTinh() == 1) {
                     row.add("Nam");
-                } else row.add("Nữ");             
-                
+                } else {
+                    row.add("Nữ");
+                }
+
                 row.add(d.getDienthoai());
                 row.add(d.getDiachi());
                 row.add(d.getNghenghiep());
@@ -913,36 +926,39 @@ public class QuanLyDocGia extends javax.swing.JFrame {
             tbDocGia.setModel(resOfSearch);
         }
     }
-    
-    
-    private boolean ValidateThemDocGia(){
+
+    private boolean ValidateThemDocGia() {
         String madocgia, hodocgia, tendocgia, ngaysinh, gioitinh, diachi, dienthoai, nghenghiep, trinhdo;
         int GioiTinh;
-        madocgia=txMaDG.getText();
-        hodocgia=txHoDG.getText();
-        tendocgia=txTenDG.getText();
-        ngaysinh=txNSDG.getText();
-        diachi=txDCDG.getText();
-        dienthoai=txDTDG.getText();
-        nghenghiep=txNNDG.getText();
-       if(txGTDG.getText().equals("Nam")){
-            GioiTinh=1;
-        } else  if(txGTDG.getText().equals("Nữ")){
-            GioiTinh=0;} else GioiTinh=-1;
+        madocgia = txMaDG.getText();
+        hodocgia = txHoDG.getText();
+        tendocgia = txTenDG.getText();
+        ngaysinh = txNSDG.getText();
+        diachi = txDCDG.getText();
+        dienthoai = txDTDG.getText();
+        nghenghiep = txNNDG.getText();
+        if (txGTDG.getText().equals("Nam")) {
+            GioiTinh = 1;
+        } else if (txGTDG.getText().equals("Nữ")) {
+            GioiTinh = 0;
+        } else {
+            GioiTinh = -1;
+        }
 //        trinhdo=cbTDDG.getSelectedIndex();
-        if(madocgia.equals("") || hodocgia.equals("") || tendocgia.equals("") || ngaysinh.equals("") || diachi.equals("") || dienthoai.equals("") || nghenghiep.equals("") ){
+        if (madocgia.equals("") || hodocgia.equals("") || tendocgia.equals("") || ngaysinh.equals("") || diachi.equals("") || dienthoai.equals("") || nghenghiep.equals("")) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        
-        for(DocGiaDTO docgia: docgiabus.getList()){
-            if(madocgia.equals(docgia.getMaDocGia())){
+
+        for (DocGiaDTO docgia : docgiabus.getList()) {
+            if (madocgia.equals(docgia.getMaDocGia())) {
                 JOptionPane.showMessageDialog(null, "Mã độc giả đã tồn tại", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }
-        }     
+        }
         return true;
     }
+
     /**
      * @param args the command line arguments
      */
@@ -974,10 +990,10 @@ public class QuanLyDocGia extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                QuanLyDocGia QLDG=new QuanLyDocGia();
+                QuanLyDocGia QLDG = new QuanLyDocGia();
                 try {
-                    QLDG.List();          
-                } catch (Exception ex) { 
+                    QLDG.List();
+                } catch (Exception ex) {
                     Logger.getLogger(QuanLyDocGia.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 QLDG.setVisible(true);

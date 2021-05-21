@@ -14,25 +14,28 @@ import DTO.NhaCungCapDTO;
 import java.util.ArrayList;
 
 public class NhaCungCapBUS {
+
     private ArrayList<NhaCungCapDTO> listNhaCungCap;
-    
-    public NhaCungCapBUS(){
-    
+
+    public NhaCungCapBUS() {
+
     }
-    
-    public void listNhaCungCap() throws Exception{
-        NhaCungCapDAO nhacungcapdao=new NhaCungCapDAO();
-        listNhaCungCap=new ArrayList<NhaCungCapDTO>();
-        listNhaCungCap=nhacungcapdao.list();
+
+    public void listNhaCungCap() throws Exception {
+        NhaCungCapDAO nhacungcapdao = new NhaCungCapDAO();
+        listNhaCungCap = new ArrayList<NhaCungCapDTO>();
+        listNhaCungCap = nhacungcapdao.list();
     }
-     public void Add(NhaCungCapDTO ncc) throws Exception {
+
+    public void Add(NhaCungCapDTO ncc) throws Exception {
         listNhaCungCap.add(ncc);
-        NhaCungCapDAO nhacungcapdao=new NhaCungCapDAO();
+        NhaCungCapDAO nhacungcapdao = new NhaCungCapDAO();
         nhacungcapdao.Insert(ncc);
     }
-     public void Edit(NhaCungCapDTO ncc) throws Exception {
-        for(int i=0;i<listNhaCungCap.size();i++) {
-            if(listNhaCungCap.get(i).getMaNCC().equals(ncc.getMaNCC())) {
+
+    public void Edit(NhaCungCapDTO ncc) throws Exception {
+        for (int i = 0; i < listNhaCungCap.size(); i++) {
+            if (listNhaCungCap.get(i).getMaNCC().equals(ncc.getMaNCC())) {
                 listNhaCungCap.set(i, ncc);
                 NhaCungCapDAO nccdao = new NhaCungCapDAO();
                 nccdao.Update(ncc);
@@ -40,10 +43,10 @@ public class NhaCungCapBUS {
             }
         }
     }
-    
+
     public void Remove(String MaNCC) throws Exception {
-        for(NhaCungCapDTO ncc: listNhaCungCap) {
-            if(ncc.getMaNCC().equals(MaNCC)) {
+        for (NhaCungCapDTO ncc : listNhaCungCap) {
+            if (ncc.getMaNCC().equals(MaNCC)) {
                 listNhaCungCap.remove(ncc);
                 NhaCungCapDAO nccdao = new NhaCungCapDAO();
                 nccdao.Delete(MaNCC);
@@ -51,27 +54,32 @@ public class NhaCungCapBUS {
             }
         }
     }
-    
-    public ArrayList<NhaCungCapDTO> Search(String MaNCC, String TenNCC){
-        ArrayList<NhaCungCapDTO> res=new ArrayList<NhaCungCapDTO>();
-        boolean mancc=false, tenncc=false;
-        if(MaNCC.equals(""))
-            mancc=true;
-        if(TenNCC.equals(""))
-            tenncc=true;
-        for(NhaCungCapDTO ncc: listNhaCungCap){
-            if(!MaNCC.equals(""))
-                mancc=(ncc.getMaNCC().contains(MaNCC)) ? true : false;
-            if(!TenNCC.equals(""))
-                tenncc=(ncc.getTenNCC().contains(TenNCC)) ? true : false;
-            if(mancc && tenncc)
+
+    public ArrayList<NhaCungCapDTO> Search(String MaNCC, String TenNCC) {
+        ArrayList<NhaCungCapDTO> res = new ArrayList<NhaCungCapDTO>();
+        boolean mancc = false, tenncc = false;
+        if (MaNCC.equals("")) {
+            mancc = true;
+        }
+        if (TenNCC.equals("")) {
+            tenncc = true;
+        }
+        for (NhaCungCapDTO ncc : listNhaCungCap) {
+            if (!MaNCC.equals("")) {
+                mancc = (ncc.getMaNCC().contains(MaNCC)) ? true : false;
+            }
+            if (!TenNCC.equals("")) {
+                tenncc = (ncc.getTenNCC().contains(TenNCC)) ? true : false;
+            }
+            if (mancc && tenncc) {
                 res.add(ncc);
+            }
         }
         return res;
     }
-    
-    public ArrayList<NhaCungCapDTO> getList(){
+
+    public ArrayList<NhaCungCapDTO> getList() {
         return listNhaCungCap;
     }
-  
+
 }

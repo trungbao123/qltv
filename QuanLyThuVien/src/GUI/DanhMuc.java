@@ -37,7 +37,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Lộc & Vy
  */
 public class DanhMuc extends javax.swing.JFrame {
-    
+
     private DefaultTableModel modelTheLoai = new DefaultTableModel();
     private DefaultTableModel searchTheLoai;
     private DefaultTableModel modelTacGia = new DefaultTableModel();
@@ -51,13 +51,13 @@ public class DanhMuc extends javax.swing.JFrame {
     private DefaultTableModel modelNCC = new DefaultTableModel();
     private DefaultTableModel searchNCC;
     private String position;
-    private TheLoaiBUS theloaibus=new TheLoaiBUS();
-    private TacGiaBUS tacgiabus=new TacGiaBUS();
-    private NhaXuatBanBUS nxbbus=new NhaXuatBanBUS();
-    private AccountBUS actbus=new AccountBUS();
-    private LoiPhatBUS loiphatbus=new LoiPhatBUS();
-    private NhaCungCapBUS nccbus=new NhaCungCapBUS();
-   
+    private TheLoaiBUS theloaibus = new TheLoaiBUS();
+    private TacGiaBUS tacgiabus = new TacGiaBUS();
+    private NhaXuatBanBUS nxbbus = new NhaXuatBanBUS();
+    private AccountBUS actbus = new AccountBUS();
+    private LoiPhatBUS loiphatbus = new LoiPhatBUS();
+    private NhaCungCapBUS nccbus = new NhaCungCapBUS();
+
     /**
      * Creates new form DanhMuc
      */
@@ -1629,9 +1629,9 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btConfirmNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmNXBActionPerformed
         // TODO add your handling code here:
-        int i=tbNhaXuatBan.getSelectedRow();
-        if(nxbbus.getList().size()>0){
-            NhaXuatBanDTO nxb=new NhaXuatBanDTO();
+        int i = tbNhaXuatBan.getSelectedRow();
+        if (nxbbus.getList().size() > 0) {
+            NhaXuatBanDTO nxb = new NhaXuatBanDTO();
 
             nxb.setMaNXB(txMaNXB.getText());
             nxb.setTenNXB(txTenNXB.getText());
@@ -1651,45 +1651,47 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btAllNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAllNXBActionPerformed
         // TODO add your handling code here:
-        if (nxbbus.getList().size()>0)
+        if (nxbbus.getList().size() > 0) {
             tbNhaXuatBan.setModel(modelNXB);
+        }
     }//GEN-LAST:event_btAllNXBActionPerformed
 
     private void btClearNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearNXBActionPerformed
         // TODO add your handling code here:
-        if(tbNhaXuatBan.isEnabled())
+        if (tbNhaXuatBan.isEnabled()) {
             txMaNXB.setText("");
+        }
         txTenNXB.setText("");
     }//GEN-LAST:event_btClearNXBActionPerformed
 
     private void btTimNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimNXBActionPerformed
         // TODO add your handling code here:
-        if(nxbbus.getList().isEmpty()){
+        if (nxbbus.getList().isEmpty()) {
             return;
         }
 
         String MaNXB, TenNXB;
 
-        MaNXB=txMaNXB.getText();
-        TenNXB=txTenNXB.getText();
+        MaNXB = txMaNXB.getText();
+        TenNXB = txTenNXB.getText();
 
-        ArrayList<NhaXuatBanDTO> res=new ArrayList<NhaXuatBanDTO>();
+        ArrayList<NhaXuatBanDTO> res = new ArrayList<NhaXuatBanDTO>();
         try {
-            res=nxbbus.Search(MaNXB, TenNXB);
+            res = nxbbus.Search(MaNXB, TenNXB);
         } catch (Exception ex) {
             Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (res.size()==0)
-        JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        if (res.size() == 0) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        } else {
             Vector header = new Vector();
             header.add("Mã nhà xuất bản");
             header.add("Tên nhà xuất bản");
 
             searchNXB = new DefaultTableModel(header, 0);
-            for(NhaXuatBanDTO nxb: res){
-                Vector row=new Vector();
+            for (NhaXuatBanDTO nxb : res) {
+                Vector row = new Vector();
                 row.add(nxb.getMaNXB());
                 row.add(nxb.getTenNXB());
                 searchNXB.addRow(row);
@@ -1701,7 +1703,7 @@ public class DanhMuc extends javax.swing.JFrame {
     private void btXoaNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaNXBActionPerformed
         // TODO add your handling code here:
         int i = tbNhaXuatBan.getSelectedRow();
-        if(nxbbus.getList().size()>0){
+        if (nxbbus.getList().size() > 0) {
             try {
                 nxbbus.Remove(nxbbus.getList().get(i).getMaNXB());
             } catch (Exception ex) {
@@ -1717,8 +1719,8 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btSuaNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaNXBActionPerformed
         // TODO add your handling code here:
-        int i=tbNhaXuatBan.getSelectedRow();
-        if(i<0){
+        int i = tbNhaXuatBan.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chọn nhà xuất bản cần chỉnh sửa", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -1734,11 +1736,12 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btThemNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemNXBActionPerformed
         // TODO add your handling code here:
-        position="nhaxuatban";
-        if(!validateBtThem())
-        return;
+        position = "nhaxuatban";
+        if (!validateBtThem()) {
+            return;
+        }
 
-        NhaXuatBanDTO nxb=new NhaXuatBanDTO();
+        NhaXuatBanDTO nxb = new NhaXuatBanDTO();
 
         nxb.setMaNXB(txMaNXB.getText());
         nxb.setTenNXB(txTenNXB.getText());
@@ -1749,7 +1752,7 @@ public class DanhMuc extends javax.swing.JFrame {
             Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Vector row=new Vector();
+        Vector row = new Vector();
         row.add(nxb.getMaNXB());
         row.add(nxb.getTenNXB());
 
@@ -1783,9 +1786,9 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btConfirmTGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmTGActionPerformed
         // TODO add your handling code here:
-        int i=tbTacGia.getSelectedRow();
-        if(tacgiabus.getList().size()>0){
-            TacGiaDTO tacgia=new TacGiaDTO();
+        int i = tbTacGia.getSelectedRow();
+        if (tacgiabus.getList().size() > 0) {
+            TacGiaDTO tacgia = new TacGiaDTO();
 
             tacgia.setMaTacGia(txMaTG.getText());
             tacgia.setTenTacGia(txTenTG.getText());
@@ -1805,45 +1808,47 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btAllTGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAllTGActionPerformed
         // TODO add your handling code here:
-        if (tacgiabus.getList().size()>0)
-        tbTacGia.setModel(modelTacGia);
+        if (tacgiabus.getList().size() > 0) {
+            tbTacGia.setModel(modelTacGia);
+        }
     }//GEN-LAST:event_btAllTGActionPerformed
 
     private void btClearTGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearTGActionPerformed
         // TODO add your handling code here:
-        if(tbTacGia.isEnabled())
-        txMaTG.setText("");
+        if (tbTacGia.isEnabled()) {
+            txMaTG.setText("");
+        }
         txTenTG.setText("");
     }//GEN-LAST:event_btClearTGActionPerformed
 
     private void btTimTGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimTGActionPerformed
         // TODO add your handling code here:
-        if(tacgiabus.getList().isEmpty()){
+        if (tacgiabus.getList().isEmpty()) {
             return;
         }
 
         String MaTG, TenTG;
 
-        MaTG=txMaTG.getText();
-        TenTG=txTenTG.getText();
+        MaTG = txMaTG.getText();
+        TenTG = txTenTG.getText();
 
-        ArrayList<TacGiaDTO> res=new ArrayList<TacGiaDTO>();
+        ArrayList<TacGiaDTO> res = new ArrayList<TacGiaDTO>();
         try {
-            res=tacgiabus.Search(MaTG, TenTG);
+            res = tacgiabus.Search(MaTG, TenTG);
         } catch (Exception ex) {
             Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (res.size()==0)
-        JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        if (res.size() == 0) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        } else {
             Vector header = new Vector();
             header.add("Mã tác giả");
             header.add("Tên tác giả");
 
             searchTacGia = new DefaultTableModel(header, 0);
-            for(TacGiaDTO tg: res){
-                Vector row=new Vector();
+            for (TacGiaDTO tg : res) {
+                Vector row = new Vector();
                 row.add(tg.getMaTacGia());
                 row.add(tg.getTenTacGia());
                 searchTacGia.addRow(row);
@@ -1855,7 +1860,7 @@ public class DanhMuc extends javax.swing.JFrame {
     private void btXoaTGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaTGActionPerformed
         // TODO add your handling code here:
         int i = tbTacGia.getSelectedRow();
-        if(tacgiabus.getList().size()>0){
+        if (tacgiabus.getList().size() > 0) {
             try {
                 tacgiabus.Remove(tacgiabus.getList().get(i).getMaTacGia());
             } catch (Exception ex) {
@@ -1871,8 +1876,8 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btSuaTGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaTGActionPerformed
         // TODO add your handling code here:
-        int i=tbTacGia.getSelectedRow();
-        if(i<0){
+        int i = tbTacGia.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chọn tác giả cần chỉnh sửa", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -1888,11 +1893,12 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btThemTGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemTGActionPerformed
         // TODO add your handling code here:
-        position="tacgia";
-        if(!validateBtThem())
-        return;
+        position = "tacgia";
+        if (!validateBtThem()) {
+            return;
+        }
 
-        TacGiaDTO tacgia=new TacGiaDTO();
+        TacGiaDTO tacgia = new TacGiaDTO();
 
         tacgia.setMaTacGia(txMaTG.getText());
         tacgia.setTenTacGia(txTenTG.getText());
@@ -1903,7 +1909,7 @@ public class DanhMuc extends javax.swing.JFrame {
             Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Vector row=new Vector();
+        Vector row = new Vector();
         row.add(tacgia.getMaTacGia());
         row.add(tacgia.getTenTacGia());
 
@@ -1937,9 +1943,9 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btConfirmTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmTLActionPerformed
         // TODO add your handling code here:
-        int i=tbTheLoai.getSelectedRow();
-        if(theloaibus.getList().size()>0){
-            TheLoaiDTO theloai=new TheLoaiDTO();
+        int i = tbTheLoai.getSelectedRow();
+        if (theloaibus.getList().size() > 0) {
+            TheLoaiDTO theloai = new TheLoaiDTO();
 
             theloai.setMaTheLoai(txMaTL.getText());
             theloai.setTenTheLoai(txTenTL.getText());
@@ -1959,45 +1965,47 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btAllTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAllTLActionPerformed
         // TODO add your handling code here:
-        if (theloaibus.getList().size()>0)
-        tbTheLoai.setModel(modelTheLoai);
+        if (theloaibus.getList().size() > 0) {
+            tbTheLoai.setModel(modelTheLoai);
+        }
     }//GEN-LAST:event_btAllTLActionPerformed
 
     private void btClearTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearTLActionPerformed
         // TODO add your handling code here:
-        if(tbTheLoai.isEnabled())
-        txMaTL.setText("");
+        if (tbTheLoai.isEnabled()) {
+            txMaTL.setText("");
+        }
         txTenTL.setText("");
     }//GEN-LAST:event_btClearTLActionPerformed
 
     private void btTimTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimTLActionPerformed
         // TODO add your handling code here:
-        if(theloaibus.getList().isEmpty()){
+        if (theloaibus.getList().isEmpty()) {
             return;
         }
 
         String MaTL, TenTL;
 
-        MaTL=txMaTL.getText();
-        TenTL=txTenTL.getText();
+        MaTL = txMaTL.getText();
+        TenTL = txTenTL.getText();
 
-        ArrayList<TheLoaiDTO> res=new ArrayList<TheLoaiDTO>();
+        ArrayList<TheLoaiDTO> res = new ArrayList<TheLoaiDTO>();
         try {
-            res=theloaibus.Search(MaTL, TenTL);
+            res = theloaibus.Search(MaTL, TenTL);
         } catch (Exception ex) {
             Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (res.size()==0)
-        JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        if (res.size() == 0) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        } else {
             Vector header = new Vector();
             header.add("Mã thể loại");
             header.add("Tên thể loại");
 
             searchTheLoai = new DefaultTableModel(header, 0);
-            for(TheLoaiDTO tl: res){
-                Vector row=new Vector();
+            for (TheLoaiDTO tl : res) {
+                Vector row = new Vector();
                 row.add(tl.getMaTheLoai());
                 row.add(tl.getTenTheLoai());
                 searchTheLoai.addRow(row);
@@ -2009,7 +2017,7 @@ public class DanhMuc extends javax.swing.JFrame {
     private void btXoaTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaTLActionPerformed
         // TODO add your handling code here:
         int i = tbTheLoai.getSelectedRow();
-        if(theloaibus.getList().size()>0){
+        if (theloaibus.getList().size() > 0) {
             try {
                 theloaibus.Remove(theloaibus.getList().get(i).getMaTheLoai());
             } catch (Exception ex) {
@@ -2025,8 +2033,8 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btSuaTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaTLActionPerformed
         // TODO add your handling code here:
-        int i=tbTheLoai.getSelectedRow();
-        if(i<0){
+        int i = tbTheLoai.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chọn thể loại cần chỉnh sửa", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -2042,11 +2050,12 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btThemTLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemTLActionPerformed
         // TODO add your handling code here:
-        position="theloai";
-        if(!validateBtThem())
-        return;
+        position = "theloai";
+        if (!validateBtThem()) {
+            return;
+        }
 
-        TheLoaiDTO theloai=new TheLoaiDTO();
+        TheLoaiDTO theloai = new TheLoaiDTO();
 
         theloai.setMaTheLoai(txMaTL.getText());
         theloai.setTenTheLoai(txTenTL.getText());
@@ -2057,7 +2066,7 @@ public class DanhMuc extends javax.swing.JFrame {
             Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Vector row=new Vector();
+        Vector row = new Vector();
         row.add(theloai.getMaTheLoai());
         row.add(theloai.getTenTheLoai());
 
@@ -2081,8 +2090,9 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void txMaTLKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMaTLKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        txTenTL.requestFocus();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txTenTL.requestFocus();
+        }
     }//GEN-LAST:event_txMaTLKeyPressed
 
     private void btCancelTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelTKActionPerformed
@@ -2099,9 +2109,9 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btConfirmTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmTKActionPerformed
         // TODO add your handling code here:
-        int i=tbTaiKhoan.getSelectedRow();
-        if(actbus.getList().size()>0){
-            AccountDTO act=new AccountDTO();
+        int i = tbTaiKhoan.getSelectedRow();
+        if (actbus.getList().size() > 0) {
+            AccountDTO act = new AccountDTO();
 
             act.setUsername(txUsername.getText());
             act.setPassword(txPassword.getText());
@@ -2121,45 +2131,47 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btAllTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAllTKActionPerformed
         // TODO add your handling code here:
-        if(actbus.getList().size()>0)
-        tbTaiKhoan.setModel(modelAct);
+        if (actbus.getList().size() > 0) {
+            tbTaiKhoan.setModel(modelAct);
+        }
     }//GEN-LAST:event_btAllTKActionPerformed
 
     private void btClearTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearTKActionPerformed
         // TODO add your handling code here:
-        if(tbTaiKhoan.isEnabled())
-        txUsername.setText("");
+        if (tbTaiKhoan.isEnabled()) {
+            txUsername.setText("");
+        }
         txPassword.setText("");
     }//GEN-LAST:event_btClearTKActionPerformed
 
     private void btTimTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimTKActionPerformed
         // TODO add your handling code here:
-        if(actbus.getList().isEmpty()){
+        if (actbus.getList().isEmpty()) {
             return;
         }
 
         String username, password;
 
-        username=txUsername.getText();
-        password=txPassword.getText();
+        username = txUsername.getText();
+        password = txPassword.getText();
 
-        ArrayList<AccountDTO> res=new ArrayList<AccountDTO>();
+        ArrayList<AccountDTO> res = new ArrayList<AccountDTO>();
         try {
-            res=actbus.Search(username, password);
+            res = actbus.Search(username, password);
         } catch (Exception ex) {
             Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (res.size()==0)
-        JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        if (res.size() == 0) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        } else {
             Vector header = new Vector();
             header.add("Tên đăng nhập");
             header.add("Mật khẩu");
 
             searchAct = new DefaultTableModel(header, 0);
-            for(AccountDTO act: res){
-                Vector row=new Vector();
+            for (AccountDTO act : res) {
+                Vector row = new Vector();
                 row.add(act.getUsername());
                 row.add(act.getPassword());
                 searchAct.addRow(row);
@@ -2171,7 +2183,7 @@ public class DanhMuc extends javax.swing.JFrame {
     private void btXoaTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaTKActionPerformed
         // TODO add your handling code here:
         int i = tbTaiKhoan.getSelectedRow();
-        if(actbus.getList().size()>0){
+        if (actbus.getList().size() > 0) {
             try {
                 actbus.Remove(actbus.getList().get(i).getUsername());
             } catch (Exception ex) {
@@ -2187,8 +2199,8 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btSuaTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaTKActionPerformed
         // TODO add your handling code here:
-        int i=tbTaiKhoan.getSelectedRow();
-        if(i<0){
+        int i = tbTaiKhoan.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chọn tài khoản cần chỉnh sửa", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -2204,11 +2216,12 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btThemTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemTKActionPerformed
         // TODO add your handling code here:
-        position="taikhoan";
-        if(!validateBtThem())
-        return;
+        position = "taikhoan";
+        if (!validateBtThem()) {
+            return;
+        }
 
-        AccountDTO act=new AccountDTO();
+        AccountDTO act = new AccountDTO();
 
         act.setUsername(txUsername.getText());
         act.setPassword(txPassword.getText());
@@ -2219,7 +2232,7 @@ public class DanhMuc extends javax.swing.JFrame {
             Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Vector row=new Vector();
+        Vector row = new Vector();
         row.add(act.getUsername());
         row.add(act.getPassword());
 
@@ -2251,9 +2264,9 @@ public class DanhMuc extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelNCCActionPerformed
 
     private void btConfirmNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmNCCActionPerformed
-        int i=tbNCC.getSelectedRow();
-        if(nccbus.getList().size()>0){
-            NhaCungCapDTO ncc=new NhaCungCapDTO();
+        int i = tbNCC.getSelectedRow();
+        if (nccbus.getList().size() > 0) {
+            NhaCungCapDTO ncc = new NhaCungCapDTO();
 
             ncc.setMaNCC(txMaNCC.getText());
             ncc.setTenNCC(txTenNCC.getText());
@@ -2273,20 +2286,22 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btAllNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAllNCCActionPerformed
         // TODO add your handling code here:
-        if (nccbus.getList().size()>0)
-        tbNCC.setModel(modelNCC);
+        if (nccbus.getList().size() > 0) {
+            tbNCC.setModel(modelNCC);
+        }
     }//GEN-LAST:event_btAllNCCActionPerformed
 
     private void btClearNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearNCCActionPerformed
-        if(tbNCC.isEnabled())
-        txMaNCC.setText("");
+        if (tbNCC.isEnabled()) {
+            txMaNCC.setText("");
+        }
         txTenNCC.setText("");
     }//GEN-LAST:event_btClearNCCActionPerformed
 
     private void btXoaNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaNCCActionPerformed
         // TODO add your handling code here:
         int i = tbNCC.getSelectedRow();
-        if(nccbus.getList().size()>0){
+        if (nccbus.getList().size() > 0) {
             try {
                 nccbus.Remove(nccbus.getList().get(i).getMaNCC());
             } catch (Exception ex) {
@@ -2302,8 +2317,8 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btSuaNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaNCCActionPerformed
         // TODO add your handling code here:
-        int i=tbNCC.getSelectedRow();
-        if(i<0){
+        int i = tbNCC.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chọn nhà cung cấp cần chỉnh sửa", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -2318,11 +2333,12 @@ public class DanhMuc extends javax.swing.JFrame {
     }//GEN-LAST:event_btSuaNCCActionPerformed
 
     private void btThemNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemNCCActionPerformed
-        position="nhacungcap";
-        if(!validateBtThem())
-        return;
+        position = "nhacungcap";
+        if (!validateBtThem()) {
+            return;
+        }
 
-        NhaCungCapDTO ncc=new NhaCungCapDTO();
+        NhaCungCapDTO ncc = new NhaCungCapDTO();
 
         ncc.setMaNCC(txMaNCC.getText());
         ncc.setTenNCC(txTenNCC.getText());
@@ -2333,7 +2349,7 @@ public class DanhMuc extends javax.swing.JFrame {
             Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Vector row=new Vector();
+        Vector row = new Vector();
         row.add(ncc.getMaNCC());
         row.add(ncc.getTenNCC());
 
@@ -2366,9 +2382,9 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btConfirmLPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmLPActionPerformed
         // TODO add your handling code here:
-        int i=tbLoiPhat.getSelectedRow();
-        if(loiphatbus.getList().size()>0){
-            LoiPhatDTO loiphat=new LoiPhatDTO();
+        int i = tbLoiPhat.getSelectedRow();
+        if (loiphatbus.getList().size() > 0) {
+            LoiPhatDTO loiphat = new LoiPhatDTO();
 
             loiphat.setMaLoiPhat(txMaLP.getText());
             loiphat.setTenLoiPhat(txTenLP.getText());
@@ -2388,38 +2404,41 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btAllLPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAllLPActionPerformed
         // TODO add your handling code here:
-        if(loiphatbus.getList().size()>0)
-        tbLoiPhat.setModel(modelLP);
+        if (loiphatbus.getList().size() > 0) {
+            tbLoiPhat.setModel(modelLP);
+        }
     }//GEN-LAST:event_btAllLPActionPerformed
 
     private void btClearLPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearLPActionPerformed
         // TODO add your handling code here:
-        if(tbLoiPhat.isEnabled())
-        txMaLP.setText("");
+        if (tbLoiPhat.isEnabled()) {
+            txMaLP.setText("");
+        }
         txTenLP.setText("");
     }//GEN-LAST:event_btClearLPActionPerformed
 
     private void btTimLPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimLPActionPerformed
         // TODO add your handling code here:
-        if(loiphatbus.getList().isEmpty())
-        return;
+        if (loiphatbus.getList().isEmpty()) {
+            return;
+        }
 
         String MaLP, TenLP;
-        MaLP=txMaLP.getText();
-        TenLP=txTenLP.getText();
+        MaLP = txMaLP.getText();
+        TenLP = txTenLP.getText();
 
-        ArrayList<LoiPhatDTO> res=new ArrayList<LoiPhatDTO>();
-        res=loiphatbus.Search(MaLP, TenLP);
+        ArrayList<LoiPhatDTO> res = new ArrayList<LoiPhatDTO>();
+        res = loiphatbus.Search(MaLP, TenLP);
 
-        if (res.size()==0)
-        JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        if (res.size() == 0) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        } else {
             Vector header = new Vector();
             header.add("Mã lỗi phạt");
             header.add("Tên lỗi phạt");
             searchLP = new DefaultTableModel(header, 0);
-            for(LoiPhatDTO lp: res){
-                Vector row=new Vector();
+            for (LoiPhatDTO lp : res) {
+                Vector row = new Vector();
                 row.add(lp.getMaLoiPhat());
                 row.add(lp.getTenLoiPhat());
                 searchLP.addRow(row);
@@ -2431,7 +2450,7 @@ public class DanhMuc extends javax.swing.JFrame {
     private void btXoaLPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaLPActionPerformed
         // TODO add your handling code here:
         int i = tbLoiPhat.getSelectedRow();
-        if(loiphatbus.getList().size()>0){
+        if (loiphatbus.getList().size() > 0) {
             try {
                 loiphatbus.Remove(loiphatbus.getList().get(i).getMaLoiPhat());
             } catch (Exception ex) {
@@ -2447,8 +2466,8 @@ public class DanhMuc extends javax.swing.JFrame {
 
     private void btSuaLPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaLPActionPerformed
         // TODO add your handling code here:
-        int i=tbLoiPhat.getSelectedRow();
-        if(i<0){
+        int i = tbLoiPhat.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chọn lỗi cần chỉnh sửa", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -2474,83 +2493,89 @@ public class DanhMuc extends javax.swing.JFrame {
     private void btTimNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimNCCActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btTimNCCActionPerformed
-                                                                         
-    private boolean validateBtThem(){
-        switch(position){
+
+    private boolean validateBtThem() {
+        switch (position) {
             case "theloai":
-                String MaTL, TenTL;
-                MaTL=txMaTL.getText();
-                TenTL=txTenTL.getText();
-                if(MaTL.equals("") || TenTL.equals("")){
+                String MaTL,
+                 TenTL;
+                MaTL = txMaTL.getText();
+                TenTL = txTenTL.getText();
+                if (MaTL.equals("") || TenTL.equals("")) {
                     JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                     return false;
                 }
-                for(TheLoaiDTO theloai: theloaibus.getList()){
-                    if(MaTL.equals(theloai.getMaTheLoai())){
+                for (TheLoaiDTO theloai : theloaibus.getList()) {
+                    if (MaTL.equals(theloai.getMaTheLoai())) {
                         JOptionPane.showMessageDialog(null, "Mã thể loại đã tồn tại", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                         return false;
                     }
                 }
                 break;
             case "tacgia":
-                String MaTG, TenTG;
-                MaTG=txMaTG.getText();
-                TenTG=txTenTG.getText();
-                if(MaTG.equals("") || TenTG.equals("")){
+                String MaTG,
+                 TenTG;
+                MaTG = txMaTG.getText();
+                TenTG = txTenTG.getText();
+                if (MaTG.equals("") || TenTG.equals("")) {
                     JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                     return false;
                 }
-                for(TacGiaDTO tacgia: tacgiabus.getList()){
-                    if(MaTG.equals(tacgia.getMaTacGia())){
+                for (TacGiaDTO tacgia : tacgiabus.getList()) {
+                    if (MaTG.equals(tacgia.getMaTacGia())) {
                         JOptionPane.showMessageDialog(null, "Mã tác giả đã tồn tại", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                         return false;
                     }
                 }
                 break;
             case "nhaxuatban":
-                String MaNXB, TenNXB;
-                MaNXB=txMaNXB.getText();
-                TenNXB=txTenNXB.getText();
-                if(MaNXB.equals("") || TenNXB.equals("")){
+                String MaNXB,
+                 TenNXB;
+                MaNXB = txMaNXB.getText();
+                TenNXB = txTenNXB.getText();
+                if (MaNXB.equals("") || TenNXB.equals("")) {
                     JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                     return false;
                 }
-                for(NhaXuatBanDTO nxb: nxbbus.getList()){
-                    if(MaNXB.equals(nxb.getMaNXB())){
+                for (NhaXuatBanDTO nxb : nxbbus.getList()) {
+                    if (MaNXB.equals(nxb.getMaNXB())) {
                         JOptionPane.showMessageDialog(null, "Mã nhà xuất bản đã tồn tại", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                         return false;
                     }
                 }
                 break;
             case "taikhoan":
-                String username, password;
-                username=txUsername.getText();
-                password=txPassword.getText();
-                if(username.equals("") || password.equals("")){
+                String username,
+                 password;
+                username = txUsername.getText();
+                password = txPassword.getText();
+                if (username.equals("") || password.equals("")) {
                     JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                     return false;
                 }
-                for(AccountDTO account: actbus.getList()){
-                    if(username.equals(account.getUsername())){
+                for (AccountDTO account : actbus.getList()) {
+                    if (username.equals(account.getUsername())) {
                         JOptionPane.showMessageDialog(null, "Tên đăng nhập đã tồn tại", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                         return false;
                     }
                 }
                 break;
             case "nhacungcap":
-                String MaNCC, TenNCC;
-                MaNCC=txMaNCC.getText();
-                TenNCC=txTenNCC.getText();
-                if(MaNCC.equals("") || TenNCC.equals("")){
+                String MaNCC,
+                 TenNCC;
+                MaNCC = txMaNCC.getText();
+                TenNCC = txTenNCC.getText();
+                if (MaNCC.equals("") || TenNCC.equals("")) {
                     JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                     return false;
                 }
                 break;
             case "loiphat":
-                String MaLP, TenLP;
-                MaLP=txMaLP.getText();
-                TenLP=txTenLP.getText();
-                if(MaLP.equals("") || TenLP.equals("")){
+                String MaLP,
+                 TenLP;
+                MaLP = txMaLP.getText();
+                TenLP = txTenLP.getText();
+                if (MaLP.equals("") || TenLP.equals("")) {
                     JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                     return false;
                 }
@@ -2558,72 +2583,80 @@ public class DanhMuc extends javax.swing.JFrame {
         }
         return true;
     }
-    
-    public void ListTheLoai() throws Exception{
-        if(theloaibus.getList()==null)
+
+    public void ListTheLoai() throws Exception {
+        if (theloaibus.getList() == null) {
             theloaibus.listTheLoai();
+        }
         ArrayList<TheLoaiDTO> listTL = theloaibus.getList();
-        Vector header=new Vector();
+        Vector header = new Vector();
         header.add("Mã thể loại");
         header.add("Tên thể loại");
-        if (modelTheLoai.getRowCount() == 0) 
-                modelTheLoai = new DefaultTableModel(header, 0);
-        for(TheLoaiDTO theloai: listTL) {
-            Vector row=new Vector();
+        if (modelTheLoai.getRowCount() == 0) {
+            modelTheLoai = new DefaultTableModel(header, 0);
+        }
+        for (TheLoaiDTO theloai : listTL) {
+            Vector row = new Vector();
             row.add(theloai.getMaTheLoai());
             row.add(theloai.getTenTheLoai());
             modelTheLoai.addRow(row);
         }
         tbTheLoai.setModel(modelTheLoai);
     }
-    
-    public void ListTacGia() throws Exception{
-        if(tacgiabus.getList()==null)
+
+    public void ListTacGia() throws Exception {
+        if (tacgiabus.getList() == null) {
             tacgiabus.listTacGia();
+        }
         ArrayList<TacGiaDTO> listTG = tacgiabus.getList();
-        Vector header=new Vector();
+        Vector header = new Vector();
         header.add("Mã tác giả");
         header.add("Tên tác giả");
-        if (modelTacGia.getRowCount() == 0) 
-                modelTacGia = new DefaultTableModel(header, 0);
-        for(TacGiaDTO tacgia: listTG) {
-            Vector row=new Vector();
+        if (modelTacGia.getRowCount() == 0) {
+            modelTacGia = new DefaultTableModel(header, 0);
+        }
+        for (TacGiaDTO tacgia : listTG) {
+            Vector row = new Vector();
             row.add(tacgia.getMaTacGia());
             row.add(tacgia.getTenTacGia());
             modelTacGia.addRow(row);
         }
         tbTacGia.setModel(modelTacGia);
     }
-    
-    public void ListNXB() throws Exception{
-        if(nxbbus.getList()==null)
+
+    public void ListNXB() throws Exception {
+        if (nxbbus.getList() == null) {
             nxbbus.listNXB();
+        }
         ArrayList<NhaXuatBanDTO> listNXB = nxbbus.getList();
-        Vector header=new Vector();
+        Vector header = new Vector();
         header.add("Mã nhà xuất bản");
         header.add("Tên nhà xuất bản");
-        if (modelNXB.getRowCount() == 0) 
-                modelNXB = new DefaultTableModel(header, 0);
-        for(NhaXuatBanDTO nxb: listNXB) {
-            Vector row=new Vector();
+        if (modelNXB.getRowCount() == 0) {
+            modelNXB = new DefaultTableModel(header, 0);
+        }
+        for (NhaXuatBanDTO nxb : listNXB) {
+            Vector row = new Vector();
             row.add(nxb.getMaNXB());
             row.add(nxb.getTenNXB());
             modelNXB.addRow(row);
         }
         tbNhaXuatBan.setModel(modelNXB);
     }
-    
-    public void ListAccount() throws Exception{
-        if(actbus.getList()==null)
+
+    public void ListAccount() throws Exception {
+        if (actbus.getList() == null) {
             actbus.listAccount();
+        }
         ArrayList<AccountDTO> listAct = actbus.getList();
-        Vector header=new Vector();
+        Vector header = new Vector();
         header.add("Tên đăng nhập");
         header.add("Mật khẩu");
-        if (modelAct.getRowCount() == 0) 
-                modelAct = new DefaultTableModel(header, 0);
-        for(AccountDTO act: listAct) {
-            Vector row=new Vector();
+        if (modelAct.getRowCount() == 0) {
+            modelAct = new DefaultTableModel(header, 0);
+        }
+        for (AccountDTO act : listAct) {
+            Vector row = new Vector();
             row.add(act.getUsername());
             row.add(act.getPassword());
             modelAct.addRow(row);
@@ -2631,17 +2664,19 @@ public class DanhMuc extends javax.swing.JFrame {
         tbTaiKhoan.setModel(modelAct);
     }
 
-    public void ListLoiPhat() throws Exception{
-        if(loiphatbus.getList()==null)
+    public void ListLoiPhat() throws Exception {
+        if (loiphatbus.getList() == null) {
             loiphatbus.listLoiPhat();
+        }
         ArrayList<LoiPhatDTO> listLP = loiphatbus.getList();
-        Vector header=new Vector();
+        Vector header = new Vector();
         header.add("Mã lỗi phạt");
         header.add("Tên lỗi phạt");
-        if (modelLP.getRowCount() == 0) 
-                modelLP = new DefaultTableModel(header, 0);
-        for(LoiPhatDTO lp: listLP) {
-            Vector row=new Vector();
+        if (modelLP.getRowCount() == 0) {
+            modelLP = new DefaultTableModel(header, 0);
+        }
+        for (LoiPhatDTO lp : listLP) {
+            Vector row = new Vector();
             row.add(lp.getMaLoiPhat());
             row.add(lp.getTenLoiPhat());
             modelLP.addRow(row);
@@ -2649,17 +2684,19 @@ public class DanhMuc extends javax.swing.JFrame {
         tbLoiPhat.setModel(modelLP);
     }
 
-    public void ListNCC() throws Exception{
-        if(nccbus.getList()==null)
+    public void ListNCC() throws Exception {
+        if (nccbus.getList() == null) {
             nccbus.listNhaCungCap();
+        }
         ArrayList<NhaCungCapDTO> listNCC = nccbus.getList();
-        Vector header=new Vector();
+        Vector header = new Vector();
         header.add("Mã nhà cung cấp");
         header.add("Tên nhà cung cấp");
-        if (modelNCC.getRowCount() == 0) 
-                modelNCC = new DefaultTableModel(header, 0);
-        for(NhaCungCapDTO ncc: listNCC) {
-            Vector row=new Vector();
+        if (modelNCC.getRowCount() == 0) {
+            modelNCC = new DefaultTableModel(header, 0);
+        }
+        for (NhaCungCapDTO ncc : listNCC) {
+            Vector row = new Vector();
             row.add(ncc.getMaNCC());
             row.add(ncc.getTenNCC());
             modelNCC.addRow(row);
@@ -2697,7 +2734,7 @@ public class DanhMuc extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DanhMuc danhmuc=new DanhMuc();
+                DanhMuc danhmuc = new DanhMuc();
                 try {
                     danhmuc.ListTheLoai();
                     danhmuc.ListTacGia();
@@ -2821,29 +2858,34 @@ public class DanhMuc extends javax.swing.JFrame {
     private javax.swing.JTextField txTenTL;
     private javax.swing.JTextField txUsername;
     // End of variables declaration//GEN-END:variables
-    class RoundedPanel extends JPanel
-    {
+    class RoundedPanel extends JPanel {
+
         private Color backgroundColor;
         private int cornerRadius = 15;
+
         public RoundedPanel(LayoutManager layout, int radius) {
             super(layout);
             cornerRadius = radius;
         }
+
         public RoundedPanel(LayoutManager layout, int radius, Color bgColor) {
             super(layout);
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         public RoundedPanel(int radius) {
             super();
             cornerRadius = radius;
-            
+
         }
+
         public RoundedPanel(int radius, Color bgColor) {
             super();
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -2858,7 +2900,7 @@ public class DanhMuc extends javax.swing.JFrame {
             } else {
                 graphics.setColor(getBackground());
             }
-            graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
+            graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); //paint background
             graphics.setColor(getForeground());
 //            graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
 //             

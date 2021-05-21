@@ -10,21 +10,20 @@ package DTO;
  * @author Vy
  */
 public class NhaCungCapDTO {
+
     private String maNCC;
     private String tenNCC;
- 
-    
-    
-    public NhaCungCapDTO(){
-        maNCC=null;
-        tenNCC=null;
-        
+
+    public NhaCungCapDTO() {
+        maNCC = null;
+        tenNCC = null;
+
     }
 
     public NhaCungCapDTO(String maNCC, String tenNCC) {
         this.maNCC = maNCC;
         this.tenNCC = tenNCC;
-       
+
     }
 
     public String getMaNCC() {
@@ -42,5 +41,5 @@ public class NhaCungCapDTO {
     public void setTenNCC(String tenNCC) {
         this.tenNCC = tenNCC;
     }
-   
+
 }

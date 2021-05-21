@@ -27,10 +27,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Lộc
  */
 public class TacGiaSelector extends javax.swing.JFrame {
-    
+
     private DefaultTableModel model = new DefaultTableModel();
     private DefaultTableModel resOfSearch;
-    private TacGiaBUS tacgiabus=new TacGiaBUS();
+    private TacGiaBUS tacgiabus = new TacGiaBUS();
 
     /**
      * Creates new form TheLoaiSelector
@@ -302,8 +302,9 @@ public class TacGiaSelector extends javax.swing.JFrame {
 
     private void btTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTatCaActionPerformed
         // TODO add your handling code here:
-        if(tacgiabus.getList().size()>0)
+        if (tacgiabus.getList().size() > 0) {
             table.setModel(model);
+        }
     }//GEN-LAST:event_btTatCaActionPerformed
 
     private void btTaoMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaoMoiActionPerformed
@@ -327,31 +328,33 @@ public class TacGiaSelector extends javax.swing.JFrame {
 
     private void txMaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMaKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txTen.requestFocus();
+        }
     }//GEN-LAST:event_txMaKeyPressed
 
     private void btTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimActionPerformed
         // TODO add your handling code here:
-        if(tacgiabus.getList().isEmpty())
+        if (tacgiabus.getList().isEmpty()) {
             return;
-        
+        }
+
         String Ma, Ten;
-        Ma=txMa.getText();
-        Ten=txTen.getText();
-        
-        ArrayList<TacGiaDTO> res=new ArrayList<TacGiaDTO>();
-        res=tacgiabus.Search(Ma, Ten);
-        
-        if (res.size()==0)
+        Ma = txMa.getText();
+        Ten = txTen.getText();
+
+        ArrayList<TacGiaDTO> res = new ArrayList<TacGiaDTO>();
+        res = tacgiabus.Search(Ma, Ten);
+
+        if (res.size() == 0) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        } else {
             Vector header = new Vector();
             header.add("Mã tác giả");
             header.add("Tên tác giả");
             resOfSearch = new DefaultTableModel(header, 0);
-            for(TacGiaDTO tg: res){
-                Vector row=new Vector();
+            for (TacGiaDTO tg : res) {
+                Vector row = new Vector();
                 row.add(tg.getMaTacGia());
                 row.add(tg.getTenTacGia());
                 resOfSearch.addRow(row);
@@ -362,10 +365,10 @@ public class TacGiaSelector extends javax.swing.JFrame {
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         // TODO add your handling code here:
-        int i=table.getSelectedRow();
-        if(tacgiabus.getList().size()>0){
-            TacGiaDTO tg=new TacGiaDTO();
-            tg=tacgiabus.getList().get(i);
+        int i = table.getSelectedRow();
+        if (tacgiabus.getList().size() > 0) {
+            TacGiaDTO tg = new TacGiaDTO();
+            tg = tacgiabus.getList().get(i);
             txMa.setText(tg.getMaTacGia());
             txTen.setText(tg.getTenTacGia());
         }
@@ -373,36 +376,38 @@ public class TacGiaSelector extends javax.swing.JFrame {
 
     private void btChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChonActionPerformed
         // TODO add your handling code here:
-        int i=table.getSelectedRow();
-        if(i<0){
+        int i = table.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chưa chọn tác giả", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
-        }   
-        try{
-            QuanLySach.setTacGia(tacgiabus.getList().get(i).getTenTacGia());
         }
-        catch (Exception ex){
+        try {
+            QuanLySach.setTacGia(tacgiabus.getList().get(i).getTenTacGia());
+        } catch (Exception ex) {
             System.out.println(ex);
         }
         this.dispose();
     }//GEN-LAST:event_btChonActionPerformed
-    public void List() throws Exception{
-        if(tacgiabus.getList()==null)
+    public void List() throws Exception {
+        if (tacgiabus.getList() == null) {
             tacgiabus.listTacGia();
+        }
         ArrayList<TacGiaDTO> listTG = tacgiabus.getList();
-        Vector header=new Vector();
+        Vector header = new Vector();
         header.add("Mã tác giả");
         header.add("Tên tác giả");
-        if (model.getRowCount() == 0) 
-                model = new DefaultTableModel(header, 0);
-        for(TacGiaDTO tg: listTG) {
-            Vector row=new Vector();
+        if (model.getRowCount() == 0) {
+            model = new DefaultTableModel(header, 0);
+        }
+        for (TacGiaDTO tg : listTG) {
+            Vector row = new Vector();
             row.add(tg.getMaTacGia());
             row.add(tg.getTenTacGia());
             model.addRow(row);
         }
         table.setModel(model);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -434,7 +439,7 @@ public class TacGiaSelector extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TacGiaSelector TheLoaiSel=new TacGiaSelector();
+                TacGiaSelector TheLoaiSel = new TacGiaSelector();
                 try {
                     TheLoaiSel.List();
                 } catch (Exception ex) {
@@ -462,29 +467,34 @@ public class TacGiaSelector extends javax.swing.JFrame {
     private javax.swing.JTextField txMa;
     private javax.swing.JTextField txTen;
     // End of variables declaration//GEN-END:variables
-    class RoundedPanel extends JPanel
-    {
+    class RoundedPanel extends JPanel {
+
         private Color backgroundColor;
         private int cornerRadius = 15;
+
         public RoundedPanel(LayoutManager layout, int radius) {
             super(layout);
             cornerRadius = radius;
         }
+
         public RoundedPanel(LayoutManager layout, int radius, Color bgColor) {
             super(layout);
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         public RoundedPanel(int radius) {
             super();
             cornerRadius = radius;
-            
+
         }
+
         public RoundedPanel(int radius, Color bgColor) {
             super();
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -499,7 +509,7 @@ public class TacGiaSelector extends javax.swing.JFrame {
             } else {
                 graphics.setColor(getBackground());
             }
-            graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
+            graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); //paint background
             graphics.setColor(getForeground());
 //            graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
 //             

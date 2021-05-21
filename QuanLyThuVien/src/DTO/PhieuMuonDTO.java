@@ -5,12 +5,12 @@ package DTO;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author 01042001
  */
 public class PhieuMuonDTO {
+
     private String MaPhieuMuon;
     private String MaDocGia;
     private String MaNhanVien;
@@ -24,6 +24,7 @@ public class PhieuMuonDTO {
         this.NgayMuon = NgayMuon;
         this.NgayHenTra = NgayHenTra;
     }
+
     public PhieuMuonDTO() {
         this.MaPhieuMuon = null;
         this.MaDocGia = null;
@@ -71,7 +72,5 @@ public class PhieuMuonDTO {
     public void setNgayHenTra(String NgayHenTra) {
         this.NgayHenTra = NgayHenTra;
     }
-    
-    
-    
+
 }

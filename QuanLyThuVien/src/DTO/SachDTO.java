@@ -10,6 +10,7 @@ package DTO;
  * @author Lộc
  */
 public class SachDTO {
+
     private String maSach;
     private String tenSach;
     private String theLoai;
@@ -20,14 +21,14 @@ public class SachDTO {
     private int donGia;
 
     public SachDTO() {
-        maSach=null;
-        tenSach=null;
-        theLoai=null;
-        tacGia=null;
-        nhaXuatBan=null;
-        namXuatBan=0;
-        soLuong=0;
-        donGia=0;
+        maSach = null;
+        tenSach = null;
+        theLoai = null;
+        tacGia = null;
+        nhaXuatBan = null;
+        namXuatBan = 0;
+        soLuong = 0;
+        donGia = 0;
     }
 
     public SachDTO(String maSach, String tenSach, String theLoai, String tacGia, String nhaXuatBan, int namXuatBan, int soLuong, int donGia) {
@@ -104,5 +105,5 @@ public class SachDTO {
     public void setDonGia(int donGia) {
         this.donGia = donGia;
     }
-    
+
 }

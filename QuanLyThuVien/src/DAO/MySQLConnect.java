@@ -12,89 +12,85 @@ package DAO;
 import java.sql.*;
 
 public class MySQLConnect {
-    String Host="";
-    String Username="";
-    String Password="";
-    String Database="";
-    
-    Connection connect=null;
-    Statement statement=null;
-    ResultSet result=null;
-    
-    public MySQLConnect(String Host, String Username, String Password, String Database){
-        this.Database=Database;
-        this.Username=Username;
-        this.Password=Password;
-        this.Database=Database;
+
+    String Host = "";
+    String Username = "";
+    String Password = "";
+    String Database = "";
+
+    Connection connect = null;
+    Statement statement = null;
+    ResultSet result = null;
+
+    public MySQLConnect(String Host, String Username, String Password, String Database) {
+        this.Database = Database;
+        this.Username = Username;
+        this.Password = Password;
+        this.Database = Database;
     }
-    
+
     protected void driverTest() throws Exception {
-        try{
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-        }
-        catch(java.lang.ClassNotFoundException e){
+        } catch (java.lang.ClassNotFoundException e) {
             throw new Exception("MySQL JDBC Driver not found!");
         }
     }
-    
+
     protected Connection Connect() throws Exception {
-        if(connect==null){
+        if (connect == null) {
             driverTest();
-            String url="jdbc:mysql://" + Host + ":3306/" + Database;
-            try{
-                connect=DriverManager.getConnection(url, Username, Password);
-            }
-            catch(java.sql.SQLException e){
+            String url = "jdbc:mysql://" + Host + ":3306/" + Database;
+            try {
+                connect = DriverManager.getConnection(url, Username, Password);
+            } catch (java.sql.SQLException e) {
                 throw new Exception("Không thể kết nối đến Database Server " + url + e.getMessage());
             }
         }
         return connect;
     }
-    
-    public void disConnect() throws SQLException{
-        if(result!=null && !result.isClosed()){
+
+    public void disConnect() throws SQLException {
+        if (result != null && !result.isClosed()) {
             result.close();
-            result=null;
+            result = null;
         }
-        if(statement!=null && !statement.isClosed()){
+        if (statement != null && !statement.isClosed()) {
             statement.close();
-            statement=null;
+            statement = null;
         }
-        if(connect!=null && !connect.isClosed()){
+        if (connect != null && !connect.isClosed()) {
             connect.close();
-            connect=null;
+            connect = null;
         }
     }
-    
+
     protected Statement getStatement() throws Exception {
-        if(statement==null ? true : statement.isClosed()){
-            statement=this.Connect().createStatement();
+        if (statement == null ? true : statement.isClosed()) {
+            statement = this.Connect().createStatement();
         }
         return statement;
     }
-    
-    public ResultSet excuteQuery(String Query) throws Exception{
-        try{
-            result=getStatement().executeQuery(Query);
-        }
-        catch(Exception e){
+
+    public ResultSet excuteQuery(String Query) throws Exception {
+        try {
+            result = getStatement().executeQuery(Query);
+        } catch (Exception e) {
             throw new Exception("Lỗi: " + e.getMessage() + " - " + Query);
         }
         return result;
     }
-    
+
     public int executeUpdate(String Query) throws Exception {
-        int res=Integer.MIN_VALUE;
-        try{
-            res=getStatement().executeUpdate(Query);
-        }
-        catch(Exception e){
+        int res = Integer.MIN_VALUE;
+        try {
+            res = getStatement().executeUpdate(Query);
+        } catch (Exception e) {
             throw new Exception("Lỗi: " + e.getMessage() + " - " + Query);
-        }
-        finally{
+        } finally {
             this.disConnect();
         }
         return res;
     }
-    
+
 }

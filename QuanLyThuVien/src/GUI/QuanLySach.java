@@ -19,15 +19,11 @@ import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import static java.lang.String.valueOf;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -53,20 +49,17 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Lộc
  */
 public class QuanLySach extends javax.swing.JFrame {
-    
+
     private DefaultTableModel modelSach = new DefaultTableModel();
     private DefaultTableModel resOfSearch;
-    private int EditOrSearch=1;
-    private SachBUS sachbus=new SachBUS();
-    private TacGiaBUS tacgiabus=new TacGiaBUS();
-    private NhaXuatBanBUS nxbbus=new NhaXuatBanBUS();
-  
+    private int EditOrSearch = 1;
+    private SachBUS sachbus = new SachBUS();
+    private TacGiaBUS tacgiabus = new TacGiaBUS();
+    private NhaXuatBanBUS nxbbus = new NhaXuatBanBUS();
 
-    
     /**
      * Creates new form quanLySach
      */
-    
     public QuanLySach() {
         initComponents();
     }
@@ -744,9 +737,10 @@ public class QuanLySach extends javax.swing.JFrame {
 
     private void btTaoMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaoMoiActionPerformed
         // TODO add your handling code here:
-        if(tbSach.isEnabled())
+        if (tbSach.isEnabled()) {
             txMaSach.setText("");
-        if(EditOrSearch==0){
+        }
+        if (EditOrSearch == 0) {
             txNamXuatBanMax.setText("");
             txSoLuongMax.setText("");
             txDonGiaMax.setText("");
@@ -788,14 +782,14 @@ public class QuanLySach extends javax.swing.JFrame {
             sach = sachbus.getList().get(i);
             Integer namXB, soLuong, donGia;
             String str_namXB, str_soLuong, str_donGia;
-            
-            namXB=sach.getNamXuatBan();
-            str_namXB=namXB.toString();
-            soLuong=sach.getSoLuong();
-            str_soLuong=soLuong.toString();
-            donGia=sach.getDonGia();
-            str_donGia=donGia.toString();
-            
+
+            namXB = sach.getNamXuatBan();
+            str_namXB = namXB.toString();
+            soLuong = sach.getSoLuong();
+            str_soLuong = soLuong.toString();
+            donGia = sach.getDonGia();
+            str_donGia = donGia.toString();
+
             txMaSach.setText(sach.getMaSach());
             txTenSach.setText(sach.getTenSach());
             txTheLoai.setText(sach.getTheLoai());
@@ -809,11 +803,12 @@ public class QuanLySach extends javax.swing.JFrame {
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         // TODO add your handling code here:
-        if(!ValidateThemSach())
+        if (!ValidateThemSach()) {
             return;
-       
-        SachDTO sach=new SachDTO();
-        
+        }
+
+        SachDTO sach = new SachDTO();
+
         sach.setMaSach(txMaSach.getText());
         sach.setTenSach(txTenSach.getText());
         sach.setTheLoai(txTheLoai.getText());
@@ -822,14 +817,14 @@ public class QuanLySach extends javax.swing.JFrame {
         sach.setNamXuatBan(Integer.parseInt(txNamXuatBan.getText()));
         sach.setSoLuong(Integer.parseInt(txSoLuong.getText()));
         sach.setDonGia(Integer.parseInt(txDonGia.getText()));
-        
+
         try {
             sachbus.Add(sach);
         } catch (Exception ex) {
             Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Vector row=new Vector();
+
+        Vector row = new Vector();
         row.add(sach.getMaSach());
         row.add(sach.getTenSach());
         row.add(sach.getTheLoai());
@@ -838,20 +833,20 @@ public class QuanLySach extends javax.swing.JFrame {
         row.add(sach.getNamXuatBan());
         row.add(sach.getSoLuong());
         row.add(sach.getDonGia());
-        
+
         modelSach.addRow(row);
-        
+
         tbSach.setModel(modelSach);
     }//GEN-LAST:event_btThemActionPerformed
 
     private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
         // TODO add your handling code here:
-        int i=tbSach.getSelectedRow();
-        if(i<0){
+        int i = tbSach.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chọn sách cần chỉnh sửa", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        EditOrSearch=1;
+        EditOrSearch = 1;
         txMaSach.setEditable(false);
         tbSach.setEnabled(false);
         btThem.setEnabled(false);
@@ -874,7 +869,7 @@ public class QuanLySach extends javax.swing.JFrame {
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         // TODO add your handling code here:
         int i = tbSach.getSelectedRow();
-        if(sachbus.getList().size()>0){
+        if (sachbus.getList().size() > 0) {
             try {
                 sachbus.Remove(sachbus.getList().get(i).getMaSach());
             } catch (Exception ex) {
@@ -882,7 +877,7 @@ public class QuanLySach extends javax.swing.JFrame {
             }
             modelSach.removeRow(i);
             tbSach.setModel(modelSach);
-            
+
             txMaSach.setText("");
             txTenSach.setText("");
             txTheLoai.setText("");
@@ -892,12 +887,12 @@ public class QuanLySach extends javax.swing.JFrame {
             txSoLuong.setText("");
             txDonGia.setText("");
         }
-        
+
     }//GEN-LAST:event_btXoaActionPerformed
 
     private void btTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimActionPerformed
         // TODO add your handling code here:
-        EditOrSearch=0;
+        EditOrSearch = 0;
         lbDash1.setVisible(true);
         lbDash2.setVisible(true);
         lbDash3.setVisible(true);
@@ -911,13 +906,14 @@ public class QuanLySach extends javax.swing.JFrame {
 
     private void btTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTatCaActionPerformed
         // TODO add your handling code here:
-        if (sachbus.getList().size()>0)
+        if (sachbus.getList().size() > 0) {
             tbSach.setModel(modelSach);
+        }
     }//GEN-LAST:event_btTatCaActionPerformed
 
     private void btHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyActionPerformed
         // TODO add your handling code here:
-        if(EditOrSearch==1){
+        if (EditOrSearch == 1) {
             txMaSach.setEditable(true);
             tbSach.setEnabled(true);
             btThem.setEnabled(true);
@@ -928,8 +924,7 @@ public class QuanLySach extends javax.swing.JFrame {
             btXuatEx.setEnabled(true);
             btXacNhan.setVisible(false);
             btHuy.setVisible(false);
-        }
-        else{
+        } else {
             lbDash1.setVisible(false);
             lbDash2.setVisible(false);
             lbDash3.setVisible(false);
@@ -937,7 +932,7 @@ public class QuanLySach extends javax.swing.JFrame {
             txSoLuongMax.setVisible(false);
             txDonGiaMax.setVisible(false);
             btXacNhan.setVisible(false);
-            btHuy.setVisible(false); 
+            btHuy.setVisible(false);
         }
     }//GEN-LAST:event_btHuyActionPerformed
 
@@ -948,10 +943,9 @@ public class QuanLySach extends javax.swing.JFrame {
 
     private void btXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXacNhanActionPerformed
         // TODO add your handling code here:
-        if(EditOrSearch==1){       
+        if (EditOrSearch == 1) {
             Edit();
-        }
-        else{       
+        } else {
             Search();
         }
     }//GEN-LAST:event_btXacNhanActionPerformed
@@ -962,7 +956,7 @@ public class QuanLySach extends javax.swing.JFrame {
 
     private void btTLSelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTLSelActionPerformed
         // TODO add your handling code here:
-        TheLoaiSelector TheLoaiSel=new TheLoaiSelector();
+        TheLoaiSelector TheLoaiSel = new TheLoaiSelector();
         try {
             TheLoaiSel.List();
         } catch (Exception ex) {
@@ -977,7 +971,7 @@ public class QuanLySach extends javax.swing.JFrame {
 
     private void btTGSelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTGSelActionPerformed
         // TODO add your handling code here:
-        TacGiaSelector TacGiaSel=new TacGiaSelector();
+        TacGiaSelector TacGiaSel = new TacGiaSelector();
         try {
             TacGiaSel.List();
         } catch (Exception ex) {
@@ -992,7 +986,7 @@ public class QuanLySach extends javax.swing.JFrame {
 
     private void btNXBSelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNXBSelActionPerformed
         // TODO add your handling code here:
-        NhaXuatBanSelector NXBSel=new NhaXuatBanSelector();
+        NhaXuatBanSelector NXBSel = new NhaXuatBanSelector();
         try {
             NXBSel.List();
         } catch (Exception ex) {
@@ -1015,7 +1009,7 @@ public class QuanLySach extends javax.swing.JFrame {
 
     private void txMaSachKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMaSachKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btTLSel.requestFocus();
             btTLSel.doClick();
         }
@@ -1023,33 +1017,36 @@ public class QuanLySach extends javax.swing.JFrame {
 
     private void txTenSachKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txTenSachKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txNamXuatBan.requestFocus();
+        }
     }//GEN-LAST:event_txTenSachKeyPressed
 
     private void txNamXuatBanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNamXuatBanKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if(EditOrSearch!=0)
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (EditOrSearch != 0) {
                 txSoLuong.requestFocus();
-            else
+            } else {
                 txNamXuatBanMax.requestFocus();
+            }
         }
     }//GEN-LAST:event_txNamXuatBanKeyPressed
 
     private void txSoLuongKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txSoLuongKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if(EditOrSearch!=0)
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (EditOrSearch != 0) {
                 txDonGia.requestFocus();
-            else
+            } else {
                 txSoLuongMax.requestFocus();
+            }
         }
     }//GEN-LAST:event_txSoLuongKeyPressed
 
     private void btTLSelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btTLSelKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btTGSel.requestFocus();
             btTGSel.doClick();
         }
@@ -1057,7 +1054,7 @@ public class QuanLySach extends javax.swing.JFrame {
 
     private void btTGSelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btTGSelKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btNXBSel.requestFocus();
             btNXBSel.doClick();
         }
@@ -1065,28 +1062,28 @@ public class QuanLySach extends javax.swing.JFrame {
 
     private void btNXBSelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btNXBSelKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txTenSach.requestFocus();
         }
     }//GEN-LAST:event_btNXBSelKeyPressed
 
     private void txNamXuatBanMaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txNamXuatBanMaxKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txSoLuong.requestFocus();
         }
     }//GEN-LAST:event_txNamXuatBanMaxKeyPressed
 
     private void txSoLuongMaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txSoLuongMaxKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txDonGia.requestFocus();
         }
     }//GEN-LAST:event_txSoLuongMaxKeyPressed
 
     private void txDonGiaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txDonGiaKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER && EditOrSearch==0){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && EditOrSearch == 0) {
             txDonGiaMax.requestFocus();
         }
     }//GEN-LAST:event_txDonGiaKeyPressed
@@ -1113,14 +1110,14 @@ public class QuanLySach extends javax.swing.JFrame {
             // Create a Row
             XSSFRow headerRow = sheet.createRow(0);
             String[] columns = {
-                    "Mã sách",
-                    "Tên sách",
-                    "Thể loại",
-                    "Tác giả",
-                    "Nhà xuất bản",
-                    "Năm xuất bản",
-                    "Số lượng",
-                    "Đơn giá"
+                "Mã sách",
+                "Tên sách",
+                "Thể loại",
+                "Tác giả",
+                "Nhà xuất bản",
+                "Năm xuất bản",
+                "Số lượng",
+                "Đơn giá"
             };
 
             // Create cells
@@ -1150,7 +1147,7 @@ public class QuanLySach extends javax.swing.JFrame {
                 sheet.autoSizeColumn(i);
             }
 
-            try{
+            try {
                 OutputStream os = new FileOutputStream(file + ".xlsx");
                 workbook.write(os);
                 JOptionPane.showMessageDialog(null, "Lưu file thành công!");
@@ -1208,7 +1205,7 @@ public class QuanLySach extends javax.swing.JFrame {
                     sach.setNamXuatBan(NamXuatBan);
                     sach.setSoLuong(SoLuong);
                     sach.setDonGia(DonGia);
-                    
+
                     sachbus.Add(sach);
                 }
                 JOptionPane.showMessageDialog(null, "Nhập file thành công!");
@@ -1234,7 +1231,7 @@ public class QuanLySach extends javax.swing.JFrame {
         }
         //Dua bang ve trang thai ban dau
         ArrayList<SachDTO> listSach = sachbus.getList();
-        Vector header=new Vector();
+        Vector header = new Vector();
         header.add("Mã sách");
         header.add("Tên sách");
         header.add("Thể loại");
@@ -1244,8 +1241,8 @@ public class QuanLySach extends javax.swing.JFrame {
         header.add("Số lượng");
         header.add("Đơn giá");
         modelSach = new DefaultTableModel(header, 0);
-        for(SachDTO sach: listSach) {
-            Vector row=new Vector();
+        for (SachDTO sach : listSach) {
+            Vector row = new Vector();
             row.add(sach.getMaSach());
             row.add(sach.getTenSach());
             row.add(sach.getTheLoai());
@@ -1257,42 +1254,43 @@ public class QuanLySach extends javax.swing.JFrame {
             modelSach.addRow(row);
         }
         tbSach.setModel(modelSach);
-        
+
     }//GEN-LAST:event_btNhapExActionPerformed
-    
+
     private static Object getCellValue(Cell cell) {
         CellType cellType = cell.getCellTypeEnum();
         Object cellValue = null;
         switch (cellType) {
-        case BOOLEAN:
-            cellValue = cell.getBooleanCellValue();
-            break;
-        case FORMULA:
-            Workbook workbook = cell.getSheet().getWorkbook();
-            FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
-            cellValue = evaluator.evaluate(cell).getNumberValue();
-            break;
-        case NUMERIC:
-            cellValue = cell.getNumericCellValue();
-            break;
-        case STRING:
-            cellValue = cell.getStringCellValue();
-            break;
-        case _NONE:
-        case BLANK:
-        case ERROR:
-            break;
-        default:
-            break;
+            case BOOLEAN:
+                cellValue = cell.getBooleanCellValue();
+                break;
+            case FORMULA:
+                Workbook workbook = cell.getSheet().getWorkbook();
+                FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
+                cellValue = evaluator.evaluate(cell).getNumberValue();
+                break;
+            case NUMERIC:
+                cellValue = cell.getNumericCellValue();
+                break;
+            case STRING:
+                cellValue = cell.getStringCellValue();
+                break;
+            case _NONE:
+            case BLANK:
+            case ERROR:
+                break;
+            default:
+                break;
         }
         return cellValue;
     }
-    
-    public void List() throws Exception{
-        if(sachbus.getList()==null)
+
+    public void List() throws Exception {
+        if (sachbus.getList() == null) {
             sachbus.listSach();
+        }
         ArrayList<SachDTO> listSach = sachbus.getList();
-        Vector header=new Vector();
+        Vector header = new Vector();
         header.add("Mã sách");
         header.add("Tên sách");
         header.add("Thể loại");
@@ -1301,10 +1299,11 @@ public class QuanLySach extends javax.swing.JFrame {
         header.add("Năm xuất bản");
         header.add("Số lượng");
         header.add("Đơn giá");
-        if (modelSach.getRowCount() == 0) 
-                modelSach = new DefaultTableModel(header, 0);
-        for(SachDTO sach: listSach) {
-            Vector row=new Vector();
+        if (modelSach.getRowCount() == 0) {
+            modelSach = new DefaultTableModel(header, 0);
+        }
+        for (SachDTO sach : listSach) {
+            Vector row = new Vector();
             row.add(sach.getMaSach());
             row.add(sach.getTenSach());
             row.add(sach.getTheLoai());
@@ -1317,11 +1316,11 @@ public class QuanLySach extends javax.swing.JFrame {
         }
         tbSach.setModel(modelSach);
     }
-    
-    private void Edit(){
-        int i=tbSach.getSelectedRow();
-        if(sachbus.getList().size()>0){
-            SachDTO sach=new SachDTO();
+
+    private void Edit() {
+        int i = tbSach.getSelectedRow();
+        if (sachbus.getList().size() > 0) {
+            SachDTO sach = new SachDTO();
 
             sach.setMaSach(txMaSach.getText());
             sach.setTenSach(txTenSach.getText());
@@ -1350,55 +1349,61 @@ public class QuanLySach extends javax.swing.JFrame {
             tbSach.setModel(modelSach);
         }
     }
-    
-    private void Search(){
-        if(sachbus.getList().isEmpty()){
+
+    private void Search() {
+        if (sachbus.getList().isEmpty()) {
             return;
         }
 
         String MaSach, TenSach, TheLoai, TacGia, NhaXuatBan;
         int NamXuatBan, SoLuong, DonGia, NamXuatBanMax, SoLuongMax, DonGiaMax;
 
-        MaSach=txMaSach.getText();
-        TenSach=txTenSach.getText();
-        TheLoai=txTheLoai.getText();
-        TacGia=txTacGia.getText();
-        NhaXuatBan=txNhaXuatBan.getText();
-        if(txNamXuatBan.getText().equals(""))
-            NamXuatBan=-1;
-        else
-            NamXuatBan=Integer.parseInt(txNamXuatBan.getText());
-        if(txSoLuong.getText().equals(""))
-            SoLuong=-1;
-        else
-            SoLuong=Integer.parseInt(txSoLuong.getText());
-        if(txDonGia.getText().equals(""))
-            DonGia=-1;
-        else
-            DonGia=Integer.parseInt(txDonGia.getText());
-        if(txNamXuatBanMax.getText().equals(""))
-            NamXuatBanMax=-1;
-        else
-            NamXuatBanMax=Integer.parseInt(txNamXuatBanMax.getText());
-        if(txSoLuongMax.getText().equals(""))
-            SoLuongMax=-1;
-        else
-            SoLuongMax=Integer.parseInt(txSoLuongMax.getText());
-        if(txDonGiaMax.getText().equals(""))
-            DonGiaMax=-1;
-        else
-            DonGiaMax=Integer.parseInt(txDonGiaMax.getText());
+        MaSach = txMaSach.getText();
+        TenSach = txTenSach.getText();
+        TheLoai = txTheLoai.getText();
+        TacGia = txTacGia.getText();
+        NhaXuatBan = txNhaXuatBan.getText();
+        if (txNamXuatBan.getText().equals("")) {
+            NamXuatBan = -1;
+        } else {
+            NamXuatBan = Integer.parseInt(txNamXuatBan.getText());
+        }
+        if (txSoLuong.getText().equals("")) {
+            SoLuong = -1;
+        } else {
+            SoLuong = Integer.parseInt(txSoLuong.getText());
+        }
+        if (txDonGia.getText().equals("")) {
+            DonGia = -1;
+        } else {
+            DonGia = Integer.parseInt(txDonGia.getText());
+        }
+        if (txNamXuatBanMax.getText().equals("")) {
+            NamXuatBanMax = -1;
+        } else {
+            NamXuatBanMax = Integer.parseInt(txNamXuatBanMax.getText());
+        }
+        if (txSoLuongMax.getText().equals("")) {
+            SoLuongMax = -1;
+        } else {
+            SoLuongMax = Integer.parseInt(txSoLuongMax.getText());
+        }
+        if (txDonGiaMax.getText().equals("")) {
+            DonGiaMax = -1;
+        } else {
+            DonGiaMax = Integer.parseInt(txDonGiaMax.getText());
+        }
 
-        ArrayList<SachDTO> res=new ArrayList<SachDTO>();
+        ArrayList<SachDTO> res = new ArrayList<SachDTO>();
         try {
-            res=sachbus.Search(MaSach, TenSach, TheLoai, TacGia, NhaXuatBan, NamXuatBan, NamXuatBanMax, SoLuong, SoLuongMax, DonGia, DonGiaMax);
+            res = sachbus.Search(MaSach, TenSach, TheLoai, TacGia, NhaXuatBan, NamXuatBan, NamXuatBanMax, SoLuong, SoLuongMax, DonGia, DonGiaMax);
         } catch (Exception ex) {
             Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (res.size()==0)
+        if (res.size() == 0) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        } else {
             Vector header = new Vector();
             header.add("Mã sách");
             header.add("Tên sách");
@@ -1409,8 +1414,8 @@ public class QuanLySach extends javax.swing.JFrame {
             header.add("Số lượng");
             header.add("Đơn giá");
             resOfSearch = new DefaultTableModel(header, 0);
-            for(SachDTO s: res){
-                Vector row=new Vector();
+            for (SachDTO s : res) {
+                Vector row = new Vector();
                 row.add(s.getMaSach());
                 row.add(s.getTenSach());
                 row.add(s.getTheLoai());
@@ -1424,60 +1429,60 @@ public class QuanLySach extends javax.swing.JFrame {
             tbSach.setModel(resOfSearch);
         }
     }
-    
-    public static void setTheLoai(String TenTL){
+
+    public static void setTheLoai(String TenTL) {
         txTheLoai.setText(TenTL);
     }
-    
-    public static void setTacGia(String TenTG){
+
+    public static void setTacGia(String TenTG) {
         txTacGia.setText(TenTG);
     }
-    
-    public static void setNhaXuatBan(String TenNXB){
+
+    public static void setNhaXuatBan(String TenNXB) {
         txNhaXuatBan.setText(TenNXB);
     }
-    
-    private boolean ValidateThemSach(){
+
+    private boolean ValidateThemSach() {
         String masach, tensach, theloai, tacgia, nhaxuatban, namxuatban, soluong, dongia;
-        masach=txMaSach.getText();
-        tensach=txTenSach.getText();
-        theloai=txTheLoai.getText();
-        tacgia=txTacGia.getText();
-        nhaxuatban=txNhaXuatBan.getText();
-        namxuatban=txNamXuatBan.getText();
-        soluong=txSoLuong.getText();
-        dongia=txDonGia.getText();
-        
-        if(masach.equals("") || tensach.equals("") || theloai.equals("") || tacgia.equals("") || nhaxuatban.equals("") || namxuatban.equals("") || soluong.equals("") || dongia.equals("")){
+        masach = txMaSach.getText();
+        tensach = txTenSach.getText();
+        theloai = txTheLoai.getText();
+        tacgia = txTacGia.getText();
+        nhaxuatban = txNhaXuatBan.getText();
+        namxuatban = txNamXuatBan.getText();
+        soluong = txSoLuong.getText();
+        dongia = txDonGia.getText();
+
+        if (masach.equals("") || tensach.equals("") || theloai.equals("") || tacgia.equals("") || nhaxuatban.equals("") || namxuatban.equals("") || soluong.equals("") || dongia.equals("")) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        
-        for(SachDTO sach: sachbus.getList()){
-            if(masach.equals(sach.getMaSach())){
+
+        for (SachDTO sach : sachbus.getList()) {
+            if (masach.equals(sach.getMaSach())) {
                 JOptionPane.showMessageDialog(null, "Mã sách đã tồn tại", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }
         }
-        
-        if(namxuatban.matches("\\D")){
+
+        if (namxuatban.matches("\\D")) {
             JOptionPane.showMessageDialog(null, "Năm xuất bản phải ở định dạng số", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        
-        if(soluong.matches("\\D")){
+
+        if (soluong.matches("\\D")) {
             JOptionPane.showMessageDialog(null, "Số lượng phải ở định dạng số", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        
-        if(dongia.matches("\\D")){
+
+        if (dongia.matches("\\D")) {
             JOptionPane.showMessageDialog(null, "Đơn giá phải ở định dạng số", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        
+
         return true;
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -1509,16 +1514,16 @@ public class QuanLySach extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                QuanLySach QLSach=new QuanLySach();
+                QuanLySach QLSach = new QuanLySach();
                 try {
-                    QLSach.List();          
-                } catch (Exception ex) { 
+                    QLSach.List();
+                } catch (Exception ex) {
                     Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 QLSach.setVisible(true);
             }
         });
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1565,29 +1570,34 @@ public class QuanLySach extends javax.swing.JFrame {
     private javax.swing.JTextField txTenSach;
     private static javax.swing.JTextField txTheLoai;
     // End of variables declaration//GEN-END:variables
-    class RoundedPanel extends JPanel
-    {
+    class RoundedPanel extends JPanel {
+
         private Color backgroundColor;
         private int cornerRadius = 15;
+
         public RoundedPanel(LayoutManager layout, int radius) {
             super(layout);
             cornerRadius = radius;
         }
+
         public RoundedPanel(LayoutManager layout, int radius, Color bgColor) {
             super(layout);
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         public RoundedPanel(int radius) {
             super();
             cornerRadius = radius;
-            
+
         }
+
         public RoundedPanel(int radius, Color bgColor) {
             super();
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -1602,7 +1612,7 @@ public class QuanLySach extends javax.swing.JFrame {
             } else {
                 graphics.setColor(getBackground());
             }
-            graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
+            graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); //paint background
             graphics.setColor(getForeground());
 //            graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
 //             

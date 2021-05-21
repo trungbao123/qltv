@@ -10,12 +10,13 @@ package DTO;
  * @author Lộc
  */
 public class TacGiaDTO {
+
     private String MaTacGia;
     private String TenTacGia;
-    
-    public TacGiaDTO(){
-        MaTacGia=null;
-        TenTacGia=null;
+
+    public TacGiaDTO() {
+        MaTacGia = null;
+        TenTacGia = null;
     }
 
     public TacGiaDTO(String MaTacGia, String TenTacGia) {
@@ -38,5 +39,5 @@ public class TacGiaDTO {
     public void setTenTacGia(String TenTacGia) {
         this.TenTacGia = TenTacGia;
     }
-    
+
 }

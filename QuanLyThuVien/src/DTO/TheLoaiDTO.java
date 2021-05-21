@@ -10,12 +10,13 @@ package DTO;
  * @author Lộc
  */
 public class TheLoaiDTO {
+
     private String MaTheLoai;
     private String TenTheLoai;
-    
-    public TheLoaiDTO(){
-        MaTheLoai=null;
-        TenTheLoai=null;
+
+    public TheLoaiDTO() {
+        MaTheLoai = null;
+        TenTheLoai = null;
     }
 
     public TheLoaiDTO(String MaTheLoai, String TenTheLoai) {
@@ -38,5 +39,5 @@ public class TheLoaiDTO {
     public void setTenTheLoai(String TenTheLoai) {
         this.TenTheLoai = TenTheLoai;
     }
-    
+
 }

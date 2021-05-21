@@ -9,13 +9,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.RenderingHints;
-import java.sql.SQLException;
 import javax.swing.JPanel;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,8 +27,8 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
     }
-    
-    public MainMenu(String username){
+
+    public MainMenu(String username) {
         initComponents();
         lbUsername.setText(username);
     }
@@ -348,7 +344,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        Login login=new Login();
+        Login login = new Login();
         login.setVisible(true);
     }//GEN-LAST:event_btThoatActionPerformed
 
@@ -358,36 +354,36 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void btQLSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLSachActionPerformed
         // TODO add your handling code here
-        QuanLySach QLSach=new QuanLySach();
-       try {     
+        QuanLySach QLSach = new QuanLySach();
+        try {
             QLSach.List();
         } catch (Exception ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-       QLSach.setVisible(true);
+        QLSach.setVisible(true);
     }//GEN-LAST:event_btQLSachActionPerformed
 
     private void btQLDocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLDocGiaActionPerformed
         // TODO add your handling code here:
         QuanLyDocGia QLDG = new QuanLyDocGia();
-                try {
-                    QLDG.List();
-                } catch (Exception ex) {
-                    Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                QLDG.setVisible(true);
+        try {
+            QLDG.List();
+        } catch (Exception ex) {
+            Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        QLDG.setVisible(true);
     }//GEN-LAST:event_btQLDocGiaActionPerformed
 
     private void btQLMuonTraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLMuonTraActionPerformed
         // TODO add your handling code here:
         QuanLyMuonTra QLMT = new QuanLyMuonTra();
-                try {
-                    QLMT.ListPhieuMuon();
-                    QLMT.ListChiTiet();
-                } catch (Exception ex) {
-                    Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                QLMT.setVisible(true);
+        try {
+            QLMT.ListPhieuMuon();
+            QLMT.ListChiTiet();
+        } catch (Exception ex) {
+            Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        QLMT.setVisible(true);
     }//GEN-LAST:event_btQLMuonTraActionPerformed
 
     private void btQLNhapHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLNhapHangActionPerformed
@@ -399,14 +395,14 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btThongKeActionPerformed
 
     private void btQLNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLNhanVienActionPerformed
-        QuanLyNhanVien QLNV=new QuanLyNhanVien();
-            try {     
-                 QLNV.List();
-             } catch (Exception ex) {
-                 Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-             }
-            QLNV.setVisible(true);
-                                              
+        QuanLyNhanVien QLNV = new QuanLyNhanVien();
+        try {
+            QLNV.List();
+        } catch (Exception ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        QLNV.setVisible(true);
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btQLNhanVienActionPerformed
 
@@ -417,7 +413,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void btQLPhieuPhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQLPhieuPhatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btQLPhieuPhatActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
@@ -447,7 +443,6 @@ public class MainMenu extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainMenu().setVisible(true);
@@ -474,29 +469,34 @@ public class MainMenu extends javax.swing.JFrame {
     private static javax.swing.JLabel lbUsername;
     // End of variables declaration//GEN-END:variables
 
-    class RoundedPanel extends JPanel
-    {
+    class RoundedPanel extends JPanel {
+
         private Color backgroundColor;
         private int cornerRadius = 15;
+
         public RoundedPanel(LayoutManager layout, int radius) {
             super(layout);
             cornerRadius = radius;
         }
+
         public RoundedPanel(LayoutManager layout, int radius, Color bgColor) {
             super(layout);
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         public RoundedPanel(int radius) {
             super();
             cornerRadius = radius;
-            
+
         }
+
         public RoundedPanel(int radius, Color bgColor) {
             super();
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -511,7 +511,7 @@ public class MainMenu extends javax.swing.JFrame {
             } else {
                 graphics.setColor(getBackground());
             }
-            graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
+            graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); //paint background
             graphics.setColor(getForeground());
 //            graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
 //             

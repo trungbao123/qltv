@@ -7,20 +7,12 @@ package GUI;
 
 import BUS.MaSachBUS;
 import DTO.MaSachDTO;
-import GUI.MainMenu.RoundedPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.LayoutManager;
-import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -36,7 +28,8 @@ public class MaSachSelector extends javax.swing.JFrame {
      */
     private DefaultTableModel model = new DefaultTableModel();
     private DefaultTableModel resOfSearch;
-    private MaSachBUS masachbus=new  MaSachBUS();
+    private MaSachBUS masachbus = new MaSachBUS();
+
     public MaSachSelector() {
         initComponents();
         table.addMouseListener(new MouseListener() {
@@ -337,8 +330,9 @@ public class MaSachSelector extends javax.swing.JFrame {
 
     private void txMaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMaKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        txTen.requestFocus();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txTen.requestFocus();
+        }
     }//GEN-LAST:event_txMaKeyPressed
 
     private void txTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txTenActionPerformed
@@ -358,51 +352,52 @@ public class MaSachSelector extends javax.swing.JFrame {
 
     private void btTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTatCaActionPerformed
         // TODO add your handling code here:
-         if(masachbus.getList().size()>0)
+        if (masachbus.getList().size() > 0) {
             table.setModel(model);
+        }
     }//GEN-LAST:event_btTatCaActionPerformed
 
     private void btTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimActionPerformed
         // TODO add your handling code here:
-        if(masachbus.getList().isEmpty())
+        if (masachbus.getList().isEmpty()) {
             return;
-        
+        }
+
         String MaSach, TenSach;
-        MaSach=txMa.getText();
-        TenSach=txTen.getText();
-        
-        ArrayList<MaSachDTO> res=new ArrayList<MaSachDTO>();
-        res=masachbus.Search(MaSach, TenSach);
-        
-        if (res.size()==0)
+        MaSach = txMa.getText();
+        TenSach = txTen.getText();
+
+        ArrayList<MaSachDTO> res = new ArrayList<MaSachDTO>();
+        res = masachbus.Search(MaSach, TenSach);
+
+        if (res.size() == 0) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        } else {
             Vector header = new Vector();
             header.add("Mã sách");
             header.add("Tên sách");
             resOfSearch = new DefaultTableModel(header, 0);
-            for(MaSachDTO tl: res){
-                Vector row=new Vector();
+            for (MaSachDTO tl : res) {
+                Vector row = new Vector();
                 row.add(tl.getMaSach());
                 row.add(tl.getTenSach());
                 resOfSearch.addRow(row);
             }
             table.setModel(resOfSearch);
         }
-        
+
     }//GEN-LAST:event_btTimActionPerformed
 
     private void btChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChonActionPerformed
         // TODO add your handling code here:
-        int i=table.getSelectedRow();
-        if(i<0){
+        int i = table.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chưa chọn mã sách", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
-        }   
-        try{
-            QuanLyMuonTra.setMaSach(masachbus.getList().get(i).getMaSach());
         }
-        catch (Exception ex){
+        try {
+            QuanLyMuonTra.setMaSach(masachbus.getList().get(i).getMaSach());
+        } catch (Exception ex) {
             System.out.println(ex);
         }
         this.dispose();
@@ -424,28 +419,32 @@ public class MaSachSelector extends javax.swing.JFrame {
         if (masachbus.getList().size() > 0) {
             MaSachDTO masach = new MaSachDTO();
             masach = masachbus.getList().get(i);
-            
-           txMa.setText(masach.getMaSach());
-           txTen.setText(masach.getTenSach());
+
+            txMa.setText(masach.getMaSach());
+            txTen.setText(masach.getTenSach());
         }
     }
-    public void List() throws Exception{
-        if(masachbus.getList()==null)
+
+    public void List() throws Exception {
+        if (masachbus.getList() == null) {
             masachbus.listMaSach();
-        ArrayList<MaSachDTO> listMS= masachbus.getList();
-        Vector header=new Vector();
+        }
+        ArrayList<MaSachDTO> listMS = masachbus.getList();
+        Vector header = new Vector();
         header.add("Mã Sách");
         header.add("Tên Sách");
-        if (model.getRowCount() == 0) 
-                model = new DefaultTableModel(header, 0);
-        for(MaSachDTO tl: listMS) {
-            Vector row=new Vector();
+        if (model.getRowCount() == 0) {
+            model = new DefaultTableModel(header, 0);
+        }
+        for (MaSachDTO tl : listMS) {
+            Vector row = new Vector();
             row.add(tl.getMaSach());
             row.add(tl.getTenSach());
             model.addRow(row);
         }
         table.setModel(model);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -476,7 +475,7 @@ public class MaSachSelector extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               MaSachSelector MaSachSel=new MaSachSelector();
+                MaSachSelector MaSachSel = new MaSachSelector();
                 try {
                     MaSachSel.List();
                 } catch (Exception ex) {
@@ -486,7 +485,7 @@ public class MaSachSelector extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btChon;

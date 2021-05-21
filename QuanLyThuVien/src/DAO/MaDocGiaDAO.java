@@ -12,16 +12,20 @@ package DAO;
 import DTO.MaDocGiaDTO;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
 public class MaDocGiaDAO {
+
     MyConnectUnit connect;
-    public MaDocGiaDAO(){
-        connect=DAO.getDAO();
+
+    public MaDocGiaDAO() {
+        connect = DAO.getDAO();
     }
-    public ArrayList<MaDocGiaDTO>list(String condition, String OderBy) throws Exception{
-        ResultSet result =this.connect.Select("docgia", condition, OderBy);
-        ArrayList<MaDocGiaDTO>listMaDocGia=new ArrayList<MaDocGiaDTO>();
-        while(result.next()){
-            MaDocGiaDTO madg=new MaDocGiaDTO();
+
+    public ArrayList<MaDocGiaDTO> list(String condition, String OderBy) throws Exception {
+        ResultSet result = this.connect.Select("docgia", condition, OderBy);
+        ArrayList<MaDocGiaDTO> listMaDocGia = new ArrayList<MaDocGiaDTO>();
+        while (result.next()) {
+            MaDocGiaDTO madg = new MaDocGiaDTO();
             madg.setMaDG(result.getString("MaDG"));
             madg.setHoLot(result.getString("HoLot"));
             madg.setTen(result.getString("Ten"));
@@ -29,12 +33,13 @@ public class MaDocGiaDAO {
         }
         return listMaDocGia;
     }
-    public ArrayList<MaDocGiaDTO> list(String condition) throws Exception{
+
+    public ArrayList<MaDocGiaDTO> list(String condition) throws Exception {
         return list(condition, null);
     }
-    
-    public ArrayList<MaDocGiaDTO> list() throws Exception{
+
+    public ArrayList<MaDocGiaDTO> list() throws Exception {
         return list(null);
     }
-    
+
 }

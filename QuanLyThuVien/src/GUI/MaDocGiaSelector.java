@@ -7,20 +7,12 @@ package GUI;
 
 import BUS.MaDocGiaBUS;
 import DTO.MaDocGiaDTO;
-import GUI.MainMenu.RoundedPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.LayoutManager;
-import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -36,7 +28,8 @@ public class MaDocGiaSelector extends javax.swing.JFrame {
      */
     private DefaultTableModel model = new DefaultTableModel();
     private DefaultTableModel resOfSearch;
-    private MaDocGiaBUS madgbus=new  MaDocGiaBUS();
+    private MaDocGiaBUS madgbus = new MaDocGiaBUS();
+
     public MaDocGiaSelector() {
         initComponents();
         table.addMouseListener(new MouseListener() {
@@ -360,8 +353,9 @@ public class MaDocGiaSelector extends javax.swing.JFrame {
 
     private void txMaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMaKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        txTen.requestFocus();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txTen.requestFocus();
+        }
     }//GEN-LAST:event_txMaKeyPressed
 
     private void txTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txTenActionPerformed
@@ -381,33 +375,35 @@ public class MaDocGiaSelector extends javax.swing.JFrame {
 
     private void btTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTatCaActionPerformed
         // TODO add your handling code here:
-         if(madgbus.getList().size()>0)
+        if (madgbus.getList().size() > 0) {
             table.setModel(model);
+        }
     }//GEN-LAST:event_btTatCaActionPerformed
 
     private void btTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimActionPerformed
         // TODO add your handling code here:
-        if(madgbus.getList().isEmpty())
+        if (madgbus.getList().isEmpty()) {
             return;
-        
+        }
+
         String MaNV, HoLot, Ten;
-        MaNV=txMa.getText();
-        HoLot=txHoLot.getText();
-        Ten=txTen.getText();
-        
-        ArrayList<MaDocGiaDTO> res=new ArrayList<MaDocGiaDTO>();
-        res=madgbus.Search(MaNV, HoLot,Ten);
-        
-        if (res.size()==0)
+        MaNV = txMa.getText();
+        HoLot = txHoLot.getText();
+        Ten = txTen.getText();
+
+        ArrayList<MaDocGiaDTO> res = new ArrayList<MaDocGiaDTO>();
+        res = madgbus.Search(MaNV, HoLot, Ten);
+
+        if (res.size() == 0) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        } else {
             Vector header = new Vector();
             header.add("Mã đọc giả");
             header.add("Họ lót");
             header.add("Tên");
             resOfSearch = new DefaultTableModel(header, 0);
-            for(MaDocGiaDTO dg: res){
-                Vector row=new Vector();
+            for (MaDocGiaDTO dg : res) {
+                Vector row = new Vector();
                 row.add(dg.getHoLot());
                 row.add(dg.getHoLot());
                 row.add(dg.getTen());
@@ -415,20 +411,19 @@ public class MaDocGiaSelector extends javax.swing.JFrame {
             }
             table.setModel(resOfSearch);
         }
-        
+
     }//GEN-LAST:event_btTimActionPerformed
 
     private void btChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChonActionPerformed
         // TODO add your handling code here:
-        int i=table.getSelectedRow();
-        if(i<0){
+        int i = table.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chưa chọn mã nhân viên", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
-        }   
-        try{
-            QuanLyMuonTra.setMaDG(madgbus.getList().get(i).getMaDG());
         }
-        catch (Exception ex){
+        try {
+            QuanLyMuonTra.setMaDG(madgbus.getList().get(i).getMaDG());
+        } catch (Exception ex) {
             System.out.println(ex);
         }
         this.dispose();
@@ -454,25 +449,28 @@ public class MaDocGiaSelector extends javax.swing.JFrame {
         int i = table.getSelectedRow();
         if (madgbus.getList().size() > 0) {
             MaDocGiaDTO madg = new MaDocGiaDTO();
-            madg= madgbus.getList().get(i);
-            
-           txMa.setText(madg.getMaDG());
-           txHoLot.setText(madg.getHoLot());
-           txTen.setText(madg.getTen());
+            madg = madgbus.getList().get(i);
+
+            txMa.setText(madg.getMaDG());
+            txHoLot.setText(madg.getHoLot());
+            txTen.setText(madg.getTen());
         }
     }
-    public void List() throws Exception{
-        if(madgbus.getList()==null)
+
+    public void List() throws Exception {
+        if (madgbus.getList() == null) {
             madgbus.listMaDG();
-        ArrayList<MaDocGiaDTO> listMS= madgbus.getList();
-        Vector header=new Vector();
+        }
+        ArrayList<MaDocGiaDTO> listMS = madgbus.getList();
+        Vector header = new Vector();
         header.add("Mã Đọc Giả");
-         header.add("Họ Lót");
+        header.add("Họ Lót");
         header.add("Tên");
-        if (model.getRowCount() == 0) 
-                model = new DefaultTableModel(header, 0);
-        for(MaDocGiaDTO dg: listMS) {
-            Vector row=new Vector();
+        if (model.getRowCount() == 0) {
+            model = new DefaultTableModel(header, 0);
+        }
+        for (MaDocGiaDTO dg : listMS) {
+            Vector row = new Vector();
             row.add(dg.getMaDG());
             row.add(dg.getHoLot());
             row.add(dg.getTen());
@@ -480,6 +478,7 @@ public class MaDocGiaSelector extends javax.swing.JFrame {
         }
         table.setModel(model);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -513,7 +512,7 @@ public class MaDocGiaSelector extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               MaDocGiaSelector MaDGSel=new MaDocGiaSelector();
+                MaDocGiaSelector MaDGSel = new MaDocGiaSelector();
                 try {
                     MaDGSel.List();
                 } catch (Exception ex) {
@@ -523,7 +522,7 @@ public class MaDocGiaSelector extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btChon;

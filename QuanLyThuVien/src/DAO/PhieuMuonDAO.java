@@ -13,17 +13,20 @@ import DTO.PhieuMuonDTO;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 public class PhieuMuonDAO {
+
     MyConnectUnit connect;
-    
-    public PhieuMuonDAO(){
-        connect=DAO.getDAO();
+
+    public PhieuMuonDAO() {
+        connect = DAO.getDAO();
     }
-    public ArrayList<PhieuMuonDTO> list(String condition, String OrderBy) throws Exception{
-        ResultSet result=this.connect.Select("phieumuon", condition, OrderBy);
-        ArrayList<PhieuMuonDTO> listPhieuMuon=new ArrayList<PhieuMuonDTO>();
-        while(result.next()){
-            PhieuMuonDTO phieumuon=new PhieuMuonDTO();
+
+    public ArrayList<PhieuMuonDTO> list(String condition, String OrderBy) throws Exception {
+        ResultSet result = this.connect.Select("phieumuon", condition, OrderBy);
+        ArrayList<PhieuMuonDTO> listPhieuMuon = new ArrayList<PhieuMuonDTO>();
+        while (result.next()) {
+            PhieuMuonDTO phieumuon = new PhieuMuonDTO();
             phieumuon.setMaPhieuMuon(result.getString("MaPhieuMuon"));
             phieumuon.setMaDocGia(result.getString("MaDocGia"));
             phieumuon.setMaNhanVien(result.getString("MaNhanVien"));
@@ -33,33 +36,38 @@ public class PhieuMuonDAO {
         }
         return listPhieuMuon;
     }
-    public ArrayList<PhieuMuonDTO> list(String condition) throws Exception{
+
+    public ArrayList<PhieuMuonDTO> list(String condition) throws Exception {
         return list(condition, null);
     }
-    public ArrayList<PhieuMuonDTO>list() throws Exception{
+
+    public ArrayList<PhieuMuonDTO> list() throws Exception {
         return list(null);
     }
-    public PhieuMuonDTO getByID (String id) throws Exception{
-        ArrayList<PhieuMuonDTO> listPhieuMuon=this.list("MaPhieuMuon"+" "+id+" ");
-        if(listPhieuMuon.size()>0)
+
+    public PhieuMuonDTO getByID(String id) throws Exception {
+        ArrayList<PhieuMuonDTO> listPhieuMuon = this.list("MaPhieuMuon" + " " + id + " ");
+        if (listPhieuMuon.size() > 0) {
             return listPhieuMuon.toArray(new PhieuMuonDTO[listPhieuMuon.size()])[0];
+        }
         return null;
     }
-    public void Insert(PhieuMuonDTO phieumuon) throws Exception{
-        HashMap<String, Object> map=new HashMap<String, Object>();
-        
+
+    public void Insert(PhieuMuonDTO phieumuon) throws Exception {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+
         map.put("MaPhieuMuon", phieumuon.getMaPhieuMuon());
         map.put("MaDocGia", phieumuon.getMaDocGia());
         map.put("MaNhanVien", phieumuon.getMaNhanVien());
         map.put("NgayMuon", phieumuon.getNgayMuon());
         map.put("NgayHenTra", phieumuon.getNgayHenTra());
- 
-        this.connect.Insert("phieumuon"+ "", map);
+
+        this.connect.Insert("phieumuon" + "", map);
     }
-    
-    public void Update(PhieuMuonDTO phieumuon) throws Exception{
-        HashMap<String, Object> map=new HashMap<String, Object>();
-        
+
+    public void Update(PhieuMuonDTO phieumuon) throws Exception {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+
         map.put("MaPhieuMuon", phieumuon.getMaPhieuMuon());
         map.put("MaDocGia", phieumuon.getMaDocGia());
         //theloai=theloaidao.getByName(phieumuon.getTheLoai());
@@ -68,11 +76,11 @@ public class PhieuMuonDAO {
         map.put("NgayMuon", phieumuon.getNgayMuon());
         //nhaxuatban=nxbdao.getByName(phieumuon.getNhaXuatBan());
         map.put("NgayHenTra", phieumuon.getNgayHenTra());
- 
+
         this.connect.Update("phieumuon", map, "MaPhieuMuon = '" + phieumuon.getMaPhieuMuon() + "'");
     }
-    
-    public void Delete(String MaPhieuMuon) throws Exception{
-        this.connect.Delete("phieumuon", "MaPhieuMuon = '" + MaPhieuMuon+ "'" );    
+
+    public void Delete(String MaPhieuMuon) throws Exception {
+        this.connect.Delete("phieumuon", "MaPhieuMuon = '" + MaPhieuMuon + "'");
     }
 }

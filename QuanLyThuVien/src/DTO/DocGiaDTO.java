@@ -1,4 +1,3 @@
-
 package DTO;
 
 /**
@@ -6,6 +5,7 @@ package DTO;
  * @author ASUS
  */
 public class DocGiaDTO {
+
     private String MaDocGia;
     private String HoDocGia;
     private String TenDocGia;
@@ -15,9 +15,9 @@ public class DocGiaDTO {
     private String Diachi;
     private String Nghenghiep;
     private String Trinhdo;
-    
-    public DocGiaDTO(){
-        
+
+    public DocGiaDTO() {
+
     }
 
     public int getGioiTinh() {
@@ -91,5 +91,5 @@ public class DocGiaDTO {
     public void setTrinhdo(String Trinhdo) {
         this.Trinhdo = Trinhdo;
     }
-    
+
 }

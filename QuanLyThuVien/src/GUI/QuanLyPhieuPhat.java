@@ -31,15 +31,15 @@ import java.awt.event.MouseListener;
  * @author Lộc
  */
 public class QuanLyPhieuPhat extends javax.swing.JFrame {
-    
+
     private DefaultTableModel modelPhieuPhat = new DefaultTableModel();
     private DefaultTableModel modelChitiet = new DefaultTableModel();
     private DefaultTableModel resOfSearch;
     private int EditOrSearch;
     private String position;
-    private PhieuPhatBUS phieuphatbus=new PhieuPhatBUS();
-    private ChiTietPhieuPhatBUS chitietbus=new ChiTietPhieuPhatBUS();
-    
+    private PhieuPhatBUS phieuphatbus = new PhieuPhatBUS();
+    private ChiTietPhieuPhatBUS chitietbus = new ChiTietPhieuPhatBUS();
+
     /**
      * Creates new form DanhMuc
      */
@@ -703,33 +703,34 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
         // TODO add your handling code here:
         int i = tbphieuphat.getSelectedRow();
         if (phieuphatbus.getList().size() > 0) {
-            PhieuPhatDTO phieuphat= new PhieuPhatDTO();
+            PhieuPhatDTO phieuphat = new PhieuPhatDTO();
             phieuphat = phieuphatbus.getList().get(i);
-           
+
             txMaPP.setText(phieuphat.getMaPhieuPhat());
             txMactpp.setText(phieuphat.getMaPhieuPhat());
             txMaPM.setText(phieuphat.getMaPhieuMuon());
             txTongTien.setText(String.valueOf(phieuphat.getTongTien()));
-            
+
         }
     }//GEN-LAST:event_tbphieuphatMouseClicked
-    private void onclickct() {                                         
+    private void onclickct() {
         // TODO add your handling code here:
         int i = tbchitietpp.getSelectedRow();
         if (chitietbus.getList().size() > 0) {
-            ChiTietPhieuPhatDTO ctphieuphat= new ChiTietPhieuPhatDTO();
+            ChiTietPhieuPhatDTO ctphieuphat = new ChiTietPhieuPhatDTO();
             ctphieuphat = chitietbus.getList().get(i);
-           
+
             txMactpp.setText(ctphieuphat.getMaPhieuPhat());
             txmasach.setText(ctphieuphat.getMaSach());
             txmaloi.setText(ctphieuphat.getMaLoiPhat());
-            
+
         }
-    }                                        
+    }
     private void btClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearActionPerformed
         // TODO add your handling code here:
-         if(tbphieuphat.isEnabled())
+        if (tbphieuphat.isEnabled()) {
             txMaPM.setText("");
+        }
         /*if(EditOrSearch==0){
             tf.setText("");
             txSoLuongMax.setText("");
@@ -741,36 +742,37 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         // TODO add your handling code here:
-        position="phieuphat";
-        if(!validateBtThem())
+        position = "phieuphat";
+        if (!validateBtThem()) {
             return;
-        
-        PhieuPhatDTO phieuphat=new PhieuPhatDTO();
-        
+        }
+
+        PhieuPhatDTO phieuphat = new PhieuPhatDTO();
+
         phieuphat.setMaPhieuPhat(txMaPP.getText());
         phieuphat.setMaPhieuMuon(txMaPM.getText());
         phieuphat.setTongTien(Integer.parseInt(txTongTien.getText()));
-        
+
         try {
             phieuphatbus.Add(phieuphat);
         } catch (Exception ex) {
             Logger.getLogger(QuanLyPhieuPhat.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Vector row=new Vector();
+
+        Vector row = new Vector();
         row.add(phieuphat.getMaPhieuPhat());
         row.add(phieuphat.getMaPhieuMuon());
         row.add(phieuphat.getTongTien());
-        
+
         modelPhieuPhat.addRow(row);
-        
+
         tbphieuphat.setModel(modelPhieuPhat);
     }//GEN-LAST:event_btThemActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         // TODO add your handling code here:
-         int i = tbphieuphat.getSelectedRow();
-        if(phieuphatbus.getList().size()>0){
+        int i = tbphieuphat.getSelectedRow();
+        if (phieuphatbus.getList().size() > 0) {
             try {
                 phieuphatbus.Remove(phieuphatbus.getList().get(i).getMaPhieuPhat());
             } catch (Exception ex) {
@@ -778,7 +780,7 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
             }
             modelPhieuPhat.removeRow(i);
             tbphieuphat.setModel(modelPhieuPhat);
-            
+
             txMaPP.setText("");
             txMaPM.setText("");
             txTongTien.setText("");
@@ -787,8 +789,8 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
 
     private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
         // TODO add your handling code here:
-        int i=tbphieuphat.getSelectedRow();
-        if(i<0){
+        int i = tbphieuphat.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chọn thể loại cần chỉnh sửa", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -816,15 +818,16 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
 
     private void txMaPPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMaPPKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txMaPM.requestFocus();
+        }
     }//GEN-LAST:event_txMaPPKeyPressed
 
     private void btxacnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btxacnhanActionPerformed
         // TODO add your handling code here:
-        int i=tbphieuphat.getSelectedRow();
-        if(phieuphatbus.getList().size()>0){
-            PhieuPhatDTO phieuphat=new PhieuPhatDTO();
+        int i = tbphieuphat.getSelectedRow();
+        if (phieuphatbus.getList().size() > 0) {
+            PhieuPhatDTO phieuphat = new PhieuPhatDTO();
 
             phieuphat.setMaPhieuPhat(txMaPP.getText());
             phieuphat.setMaPhieuMuon(txMaPM.getText());
@@ -839,53 +842,54 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
             modelPhieuPhat.setValueAt(phieuphat.getMaPhieuPhat(), i, 0);
             modelPhieuPhat.setValueAt(phieuphat.getMaPhieuMuon(), i, 1);
             modelPhieuPhat.setValueAt(phieuphat.getTongTien(), i, 2);
-            
 
             tbphieuphat.setModel(modelPhieuPhat);
         }
-  
+
     }//GEN-LAST:event_btxacnhanActionPerformed
 
     private void btAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAllActionPerformed
         // TODO add your handling code here:
-        if (phieuphatbus.getList().size()>0)
+        if (phieuphatbus.getList().size() > 0) {
             tbphieuphat.setModel(modelPhieuPhat);
+        }
     }//GEN-LAST:event_btAllActionPerformed
 
     private void btTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimActionPerformed
         // TODO add your handling code here:
-        if(phieuphatbus.getList().isEmpty()){
+        if (phieuphatbus.getList().isEmpty()) {
             return;
         }
 
         String MaPP, MaPM;
         int TongTien;
 
+        MaPP = txMaPP.getText();
+        MaPM = txMaPM.getText();
+        if (txTongTien.getText().equals("")) {
+            TongTien = -1;
+        } else {
+            TongTien = Integer.parseInt(txTongTien.getText());
+        }
 
-        MaPP=txMaPP.getText();
-        MaPM=txMaPM.getText();
-        if(txTongTien.getText().equals("")){
-            TongTien=-1;
-        }else TongTien=Integer.parseInt(txTongTien.getText());
-        
-        ArrayList<PhieuPhatDTO> res=new ArrayList<PhieuPhatDTO>();
+        ArrayList<PhieuPhatDTO> res = new ArrayList<PhieuPhatDTO>();
         try {
-            res=phieuphatbus.Search(MaPP, MaPM, TongTien);
+            res = phieuphatbus.Search(MaPP, MaPM, TongTien);
         } catch (Exception ex) {
             Logger.getLogger(QuanLyPhieuPhat.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (res.size()==0)
+        if (res.size() == 0) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        } else {
             Vector header = new Vector();
             header.add("Mã  phiếu phạt");
             header.add("Mã phiếu mượn");
             header.add("Tổng tiền phạt");
-            
+
             resOfSearch = new DefaultTableModel(header, 0);
-            for(PhieuPhatDTO tl: res){
-                Vector row=new Vector();
+            for (PhieuPhatDTO tl : res) {
+                Vector row = new Vector();
                 row.add(tl.getMaPhieuPhat());
                 row.add(tl.getMaPhieuMuon());
                 row.add(tl.getTongTien());
@@ -901,7 +905,7 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
 
     private void btmapmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmapmActionPerformed
         // TODO add your handling code here:
-        QuanLyMuonTra qlmt=new  QuanLyMuonTra();
+        QuanLyMuonTra qlmt = new QuanLyMuonTra();
         try {
             qlmt.ListPhieuMuon();
             qlmt.ListChiTiet();
@@ -913,7 +917,7 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
 
     private void btmalpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmalpActionPerformed
         // TODO add your handling code here:
-        DanhSachQuyDinh dsqd=new  DanhSachQuyDinh();
+        DanhSachQuyDinh dsqd = new DanhSachQuyDinh();
         try {
             dsqd.List();
         } catch (Exception ex) {
@@ -924,7 +928,7 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
 
     private void btmasachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmasachActionPerformed
         // TODO add your handling code here:
-        QuanLyMuonTra qlmt=new  QuanLyMuonTra();
+        QuanLyMuonTra qlmt = new QuanLyMuonTra();
         try {
             qlmt.ListPhieuMuon();
             qlmt.ListChiTiet();
@@ -936,36 +940,37 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
 
     private void btThemCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemCTActionPerformed
         // TODO add your handling code here:
-        position="chitietphieuphat";
-        if(!validateBtThem())
+        position = "chitietphieuphat";
+        if (!validateBtThem()) {
             return;
-        
-        ChiTietPhieuPhatDTO ctphieuphat=new ChiTietPhieuPhatDTO();
-        
+        }
+
+        ChiTietPhieuPhatDTO ctphieuphat = new ChiTietPhieuPhatDTO();
+
         ctphieuphat.setMaPhieuPhat(txMactpp.getText());
         ctphieuphat.setMaSach(txmasach.getText());
         ctphieuphat.setMaLoiPhat(txmaloi.getText());
-        
+
         try {
             chitietbus.Add(ctphieuphat);
         } catch (Exception ex) {
             Logger.getLogger(QuanLyPhieuPhat.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Vector row=new Vector();
+
+        Vector row = new Vector();
         row.add(ctphieuphat.getMaPhieuPhat());
         row.add(ctphieuphat.getMaSach());
         row.add(ctphieuphat.getMaLoiPhat());
-        
+
         modelChitiet.addRow(row);
-        
+
         tbchitietpp.setModel(modelChitiet);
     }//GEN-LAST:event_btThemCTActionPerformed
 
     private void btSuaCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaCTActionPerformed
         // TODO add your handling code here:
-         int i=tbchitietpp.getSelectedRow();
-        if(i<0){
+        int i = tbchitietpp.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chọn chi tiết lỗicần chỉnh sửa", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -981,9 +986,9 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
 
     private void btxacnhanctActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btxacnhanctActionPerformed
         // TODO add your handling code here:
-        int i=tbchitietpp.getSelectedRow();
-        if(chitietbus.getList().size()>0){
-            ChiTietPhieuPhatDTO ctphieuphat=new ChiTietPhieuPhatDTO();
+        int i = tbchitietpp.getSelectedRow();
+        if (chitietbus.getList().size() > 0) {
+            ChiTietPhieuPhatDTO ctphieuphat = new ChiTietPhieuPhatDTO();
 
             ctphieuphat.setMaPhieuPhat(txMactpp.getText());
             ctphieuphat.setMaSach(txmasach.getText());
@@ -998,11 +1003,10 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
             modelChitiet.setValueAt(ctphieuphat.getMaPhieuPhat(), i, 0);
             modelChitiet.setValueAt(ctphieuphat.getMaSach(), i, 1);
             modelChitiet.setValueAt(ctphieuphat.getMaLoiPhat(), i, 2);
-            
 
             tbchitietpp.setModel(modelChitiet);
         }
-  
+
     }//GEN-LAST:event_btxacnhanctActionPerformed
 
     private void btHuyCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyCTActionPerformed
@@ -1019,18 +1023,18 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
 
     private void btXoaCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaCTActionPerformed
         // TODO add your handling code here:
-         int i = tbchitietpp.getSelectedRow();
-        if(chitietbus.getList().size()>0){
+        int i = tbchitietpp.getSelectedRow();
+        if (chitietbus.getList().size() > 0) {
             try {
                 chitietbus.Remove(chitietbus.getList().get(i).getMaPhieuPhat(),
-                                                   chitietbus.getList().get(i).getMaSach(),
-                                                   chitietbus.getList().get(i).getMaLoiPhat());
+                        chitietbus.getList().get(i).getMaSach(),
+                        chitietbus.getList().get(i).getMaLoiPhat());
             } catch (Exception ex) {
                 Logger.getLogger(QuanLyPhieuPhat.class.getName()).log(Level.SEVERE, null, ex);
             }
             modelChitiet.removeRow(i);
             tbchitietpp.setModel(modelChitiet);
-            
+
             txMactpp.setText("");
             txmasach.setText("");
             txmaloi.setText("");
@@ -1039,35 +1043,34 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
 
     private void btTimCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimCTActionPerformed
         // TODO add your handling code here:
-        if(chitietbus.getList().isEmpty()){
+        if (chitietbus.getList().isEmpty()) {
             return;
         }
 
         String MaPP, MaSach, MaLP;
 
+        MaPP = txMactpp.getText();
+        MaSach = txmasach.getText();
+        MaLP = txmaloi.getText();
 
-        MaPP=txMactpp.getText();
-        MaSach=txmasach.getText();
-        MaLP=txmaloi.getText();
-        
-        ArrayList<ChiTietPhieuPhatDTO> res=new ArrayList<ChiTietPhieuPhatDTO>();
+        ArrayList<ChiTietPhieuPhatDTO> res = new ArrayList<ChiTietPhieuPhatDTO>();
         try {
-            res=chitietbus.Search(MaPP, MaSach, MaLP);
+            res = chitietbus.Search(MaPP, MaSach, MaLP);
         } catch (Exception ex) {
             Logger.getLogger(QuanLyPhieuPhat.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (res.size()==0)
+        if (res.size() == 0) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        } else {
             Vector header = new Vector();
             header.add("Mã  phiếu phạt");
             header.add("Mã sách");
             header.add("Mã lỗi phạt");
-            
+
             resOfSearch = new DefaultTableModel(header, 0);
-            for(ChiTietPhieuPhatDTO tl: res){
-                Vector row=new Vector();
+            for (ChiTietPhieuPhatDTO tl : res) {
+                Vector row = new Vector();
                 row.add(tl.getMaPhieuPhat());
                 row.add(tl.getMaSach());
                 row.add(tl.getMaLoiPhat());
@@ -1079,14 +1082,16 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
 
     private void btAllCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAllCTActionPerformed
         // TODO add your handling code here:
-         if (chitietbus.getList().size()>0)
+        if (chitietbus.getList().size() > 0) {
             tbchitietpp.setModel(modelChitiet);
+        }
     }//GEN-LAST:event_btAllCTActionPerformed
 
     private void btClearCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClearCTActionPerformed
         // TODO add your handling code here:
-        if(tbchitietpp.isEnabled())
+        if (tbchitietpp.isEnabled()) {
             txMactpp.setText("");
+        }
         /*if(EditOrSearch==0){
             tf.setText("");
             txSoLuongMax.setText("");
@@ -1095,53 +1100,58 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
         txmasach.setText("");
         txmaloi.setText("");
     }//GEN-LAST:event_btClearCTActionPerformed
-    
-    private boolean validateBtThem(){
-        switch(position){
+
+    private boolean validateBtThem() {
+        switch (position) {
             case "phieuphat":
-                String MaPP, MaPM;
+                String MaPP,
+                 MaPM;
                 int TongTien;
-                MaPP=txMaPP.getText();
-                MaPM=txMaPM.getText();
-                TongTien=Integer.parseInt(txTongTien.getText());
-                if(MaPP.equals("") || MaPM.equals("") || TongTien==-1){
+                MaPP = txMaPP.getText();
+                MaPM = txMaPM.getText();
+                TongTien = Integer.parseInt(txTongTien.getText());
+                if (MaPP.equals("") || MaPM.equals("") || TongTien == -1) {
                     JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                     return false;
                 }
-                for(PhieuPhatDTO phieuphat: phieuphatbus.getList()){
-                    if(MaPP.equals(phieuphat.getMaPhieuPhat())){
+                for (PhieuPhatDTO phieuphat : phieuphatbus.getList()) {
+                    if (MaPP.equals(phieuphat.getMaPhieuPhat())) {
                         JOptionPane.showMessageDialog(null, "Mã phiếu phạt đã tồn tại", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                         return false;
                     }
                 }
                 break;
             case "chitietphieuphat":
-                String MaPhieuPhat, MaSach,MaLP;
-                MaPhieuPhat=txMactpp.getText();
-                MaSach=txmasach.getText();
-                MaLP=txmaloi.getText();
-                if(MaPhieuPhat.equals("") || MaSach.equals("") || MaLP.equals("")){
+                String MaPhieuPhat,
+                 MaSach,
+                 MaLP;
+                MaPhieuPhat = txMactpp.getText();
+                MaSach = txmasach.getText();
+                MaLP = txmaloi.getText();
+                if (MaPhieuPhat.equals("") || MaSach.equals("") || MaLP.equals("")) {
                     JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                     return false;
                 }
                 break;
-            
+
         }
         return true;
     }
-    
-    public void ListPhieuPhat() throws Exception{
-        if(phieuphatbus.getList()==null)
+
+    public void ListPhieuPhat() throws Exception {
+        if (phieuphatbus.getList() == null) {
             phieuphatbus.listPhieuPhat();
+        }
         ArrayList<PhieuPhatDTO> listPP = phieuphatbus.getList();
-        Vector header=new Vector();
+        Vector header = new Vector();
         header.add("Mã phiếu phạt");
         header.add("Mã phiếu mượn");
         header.add("Tổng tiền phạt");
-        if (modelPhieuPhat.getRowCount() == 0) 
-                modelPhieuPhat= new DefaultTableModel(header, 0);
-        for(PhieuPhatDTO phieuphat: listPP) {
-            Vector row=new Vector();
+        if (modelPhieuPhat.getRowCount() == 0) {
+            modelPhieuPhat = new DefaultTableModel(header, 0);
+        }
+        for (PhieuPhatDTO phieuphat : listPP) {
+            Vector row = new Vector();
             row.add(phieuphat.getMaPhieuPhat());
             row.add(phieuphat.getMaPhieuMuon());
             row.add(phieuphat.getTongTien());
@@ -1149,18 +1159,21 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
         }
         tbphieuphat.setModel(modelPhieuPhat);
     }
-    public void ListCTPhieuPhat() throws Exception{
-        if(chitietbus.getList()==null)
+
+    public void ListCTPhieuPhat() throws Exception {
+        if (chitietbus.getList() == null) {
             chitietbus.listChiTietPhieuPhat();
+        }
         ArrayList<ChiTietPhieuPhatDTO> listCTPP = chitietbus.getList();
-        Vector header=new Vector();
+        Vector header = new Vector();
         header.add("Mã phiếu phạt");
         header.add("Mã sách");
         header.add("Mã lỗi phạt");
-        if (modelChitiet.getRowCount() == 0) 
-                modelChitiet= new DefaultTableModel(header, 0);
-        for(ChiTietPhieuPhatDTO phieuphat: listCTPP) {
-            Vector row=new Vector();
+        if (modelChitiet.getRowCount() == 0) {
+            modelChitiet = new DefaultTableModel(header, 0);
+        }
+        for (ChiTietPhieuPhatDTO phieuphat : listCTPP) {
+            Vector row = new Vector();
             row.add(phieuphat.getMaPhieuPhat());
             row.add(phieuphat.getMaSach());
             row.add(phieuphat.getMaLoiPhat());
@@ -1168,34 +1181,38 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
         }
         tbchitietpp.setModel(modelChitiet);
     }
-    
-    public static  void setMaSach(String MaSach){
-                txmasach.setText(MaSach);
+
+    public static void setMaSach(String MaSach) {
+        txmasach.setText(MaSach);
     }
-    public static  void setMaPhieuMuon(String MaPhieuMuon){
-                txMaPM.setText(MaPhieuMuon);
+
+    public static void setMaPhieuMuon(String MaPhieuMuon) {
+        txMaPM.setText(MaPhieuMuon);
     }
-    public static  void setMaLoiPhat(String MaLoiPhat){
-                txmaloi.setText(MaLoiPhat);
+
+    public static void setMaLoiPhat(String MaLoiPhat) {
+        txmaloi.setText(MaLoiPhat);
     }
-    private boolean ValidateThem(){
+
+    private boolean ValidateThem() {
         String mapp, mapm, tong;
-        mapp=txMaPP.getText();
-        mapm=txMaPM.getText();
-        tong=txTongTien.getText();
-        if(mapp.equals("") || mapm.equals("") || tong.equals("")){
+        mapp = txMaPP.getText();
+        mapm = txMaPM.getText();
+        tong = txTongTien.getText();
+        if (mapp.equals("") || mapm.equals("") || tong.equals("")) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        
-        for(PhieuPhatDTO pp: phieuphatbus.getList()){
-            if(mapp.equals(pp.getMaPhieuPhat())){
+
+        for (PhieuPhatDTO pp : phieuphatbus.getList()) {
+            if (mapp.equals(pp.getMaPhieuPhat())) {
                 JOptionPane.showMessageDialog(null, "Mã độc giả đã tồn tại", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }
-        }     
+        }
         return true;
     }
+
     /**
      * @param args the command line arguments
      */
@@ -1227,7 +1244,7 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                QuanLyPhieuPhat phieuphat=new QuanLyPhieuPhat();
+                QuanLyPhieuPhat phieuphat = new QuanLyPhieuPhat();
                 try {
                     phieuphat.ListPhieuPhat();
                     phieuphat.ListCTPhieuPhat();
@@ -1283,29 +1300,34 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
     private static javax.swing.JTextField txmaloi;
     private static javax.swing.JTextField txmasach;
     // End of variables declaration//GEN-END:variables
-    class RoundedPanel extends JPanel
-    {
+    class RoundedPanel extends JPanel {
+
         private Color backgroundColor;
         private int cornerRadius = 15;
+
         public RoundedPanel(LayoutManager layout, int radius) {
             super(layout);
             cornerRadius = radius;
         }
+
         public RoundedPanel(LayoutManager layout, int radius, Color bgColor) {
             super(layout);
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         public RoundedPanel(int radius) {
             super();
             cornerRadius = radius;
-            
+
         }
+
         public RoundedPanel(int radius, Color bgColor) {
             super();
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -1320,7 +1342,7 @@ public class QuanLyPhieuPhat extends javax.swing.JFrame {
             } else {
                 graphics.setColor(getBackground());
             }
-            graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
+            graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); //paint background
             graphics.setColor(getForeground());
 //            graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
 //             

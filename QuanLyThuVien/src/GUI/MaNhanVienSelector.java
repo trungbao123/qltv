@@ -7,22 +7,12 @@ package GUI;
 
 import BUS.NhanVienBUS;
 import DTO.NhanVienDTO;
-import BUS.PhieuMuonBUS;
-import DTO.PhieuMuonDTO;
-import GUI.MainMenu.RoundedPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.LayoutManager;
-import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -38,7 +28,8 @@ public class MaNhanVienSelector extends javax.swing.JFrame {
      */
     private DefaultTableModel model = new DefaultTableModel();
     private DefaultTableModel resOfSearch;
-    private NhanVienBUS manvbus=new  NhanVienBUS();
+    private NhanVienBUS manvbus = new NhanVienBUS();
+
     public MaNhanVienSelector() {
         initComponents();
         table.addMouseListener(new MouseListener() {
@@ -409,8 +400,9 @@ public class MaNhanVienSelector extends javax.swing.JFrame {
 
     private void txMaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txMaKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        txTen.requestFocus();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txTen.requestFocus();
+        }
     }//GEN-LAST:event_txMaKeyPressed
 
     private void txTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txTenActionPerformed
@@ -430,29 +422,30 @@ public class MaNhanVienSelector extends javax.swing.JFrame {
 
     private void btTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTatCaActionPerformed
         // TODO add your handling code here:
-         if(manvbus.getList().size()>0)
+        if (manvbus.getList().size() > 0) {
             table.setModel(model);
+        }
     }//GEN-LAST:event_btTatCaActionPerformed
 
     private void btTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimActionPerformed
         // TODO add your handling code here:
-        if(manvbus.getList().isEmpty())
+        if (manvbus.getList().isEmpty()) {
             return;
-        
+        }
+
         String MaNV, HoLot, Ten, NgaySinh, DienThoai;
-        MaNV=txMa.getText();
-        HoLot=txHoLot.getText();
-        Ten=txTen.getText();
-        NgaySinh=txngaysinh.getText();
-        DienThoai=txdienthoai.getText();
-        
-        
-        ArrayList<NhanVienDTO> res=new ArrayList<NhanVienDTO>();
-        res=manvbus.Search(MaNV, HoLot,Ten, NgaySinh, DienThoai);
-        
-        if (res.size()==0)
+        MaNV = txMa.getText();
+        HoLot = txHoLot.getText();
+        Ten = txTen.getText();
+        NgaySinh = txngaysinh.getText();
+        DienThoai = txdienthoai.getText();
+
+        ArrayList<NhanVienDTO> res = new ArrayList<NhanVienDTO>();
+        res = manvbus.Search(MaNV, HoLot, Ten, NgaySinh, DienThoai);
+
+        if (res.size() == 0) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        } else {
             Vector header = new Vector();
             header.add("Mã nhân viên");
             header.add("Họ lót");
@@ -460,8 +453,8 @@ public class MaNhanVienSelector extends javax.swing.JFrame {
             header.add("Ngày Sinh");
             header.add("Điện Thoại");
             resOfSearch = new DefaultTableModel(header, 0);
-            for(NhanVienDTO nv: res){
-                Vector row=new Vector();
+            for (NhanVienDTO nv : res) {
+                Vector row = new Vector();
                 row.add(nv.getManv());
                 row.add(nv.getHolot());
                 row.add(nv.getTen());
@@ -471,30 +464,27 @@ public class MaNhanVienSelector extends javax.swing.JFrame {
             }
             table.setModel(resOfSearch);
         }
-        
+
     }//GEN-LAST:event_btTimActionPerformed
 
     private void btChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChonActionPerformed
         // TODO add your handling code here:
-        int i=table.getSelectedRow();
-        if(i<0){
+        int i = table.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chưa chọn mã nhân viên", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
-        }   
-        try{
-     
-            QuanLyMuonTra.setMaNV(manvbus.getList().get(i).getManv());
-            
         }
-        catch (Exception ex){
+        try {
+
+            QuanLyMuonTra.setMaNV(manvbus.getList().get(i).getManv());
+
+        } catch (Exception ex) {
             System.out.println(ex);
         }
-        try{
+        try {
             QuanLyNhanVien.setManv(manvbus.getList().get(i).getManv());
-            
-            
-        }
-        catch (Exception ex){
+
+        } catch (Exception ex) {
             System.out.println(ex);
         }
         this.dispose();
@@ -534,30 +524,33 @@ public class MaNhanVienSelector extends javax.swing.JFrame {
         int i = table.getSelectedRow();
         if (manvbus.getList().size() > 0) {
             NhanVienDTO manv = new NhanVienDTO();
-            manv= manvbus.getList().get(i);
-            
-           txMa.setText(manv.getManv());
-           txHoLot.setText(manv.getHolot());
-           txTen.setText(manv.getTen());
-           txngaysinh.setText(manv.getNgaysinh());
-           txdienthoai.setText(manv.getDienthoai());
-           
+            manv = manvbus.getList().get(i);
+
+            txMa.setText(manv.getManv());
+            txHoLot.setText(manv.getHolot());
+            txTen.setText(manv.getTen());
+            txngaysinh.setText(manv.getNgaysinh());
+            txdienthoai.setText(manv.getDienthoai());
+
         }
     }
-    public void List() throws Exception{
-        if(manvbus.getList()==null)
+
+    public void List() throws Exception {
+        if (manvbus.getList() == null) {
             manvbus.listNhanVien();
-        ArrayList<NhanVienDTO> listMS= manvbus.getList();
-        Vector header=new Vector();
-            header.add("Mã Nhân Viên");
-            header.add("Họ Lót");
-            header.add("Tên");
-            header.add("Ngày Sinh");
-            header.add("Điện Thoại");
-        if (model.getRowCount() == 0) 
-                model = new DefaultTableModel(header, 0);
-        for(NhanVienDTO nv: listMS) {
-            Vector row=new Vector();
+        }
+        ArrayList<NhanVienDTO> listMS = manvbus.getList();
+        Vector header = new Vector();
+        header.add("Mã Nhân Viên");
+        header.add("Họ Lót");
+        header.add("Tên");
+        header.add("Ngày Sinh");
+        header.add("Điện Thoại");
+        if (model.getRowCount() == 0) {
+            model = new DefaultTableModel(header, 0);
+        }
+        for (NhanVienDTO nv : listMS) {
+            Vector row = new Vector();
             row.add(nv.getManv());
             row.add(nv.getHolot());
             row.add(nv.getTen());
@@ -567,6 +560,7 @@ public class MaNhanVienSelector extends javax.swing.JFrame {
         }
         table.setModel(model);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -598,7 +592,7 @@ public class MaNhanVienSelector extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               MaNhanVienSelector MaNVSel=new MaNhanVienSelector();
+                MaNhanVienSelector MaNVSel = new MaNhanVienSelector();
                 try {
                     MaNVSel.List();
                 } catch (Exception ex) {
@@ -608,7 +602,7 @@ public class MaNhanVienSelector extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btChon;

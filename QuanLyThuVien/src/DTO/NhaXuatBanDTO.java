@@ -10,12 +10,13 @@ package DTO;
  * @author Lộc
  */
 public class NhaXuatBanDTO {
+
     private String MaNXB;
     private String TenNXB;
-    
-    public NhaXuatBanDTO(){
-        MaNXB=null;
-        TenNXB=null;
+
+    public NhaXuatBanDTO() {
+        MaNXB = null;
+        TenNXB = null;
     }
 
     public NhaXuatBanDTO(String MaNXB, String TenNXB) {
@@ -38,5 +39,5 @@ public class NhaXuatBanDTO {
     public void setTenNXB(String TenNXB) {
         this.TenNXB = TenNXB;
     }
-    
+
 }

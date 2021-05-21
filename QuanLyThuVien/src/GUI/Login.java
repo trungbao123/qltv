@@ -24,9 +24,9 @@ import javax.swing.JPanel;
  * @author Lộc
  */
 public class Login extends javax.swing.JFrame {
-    
-    AccountBUS accountbus=new AccountBUS();
-    
+
+    AccountBUS accountbus = new AccountBUS();
+
     /**
      * Creates new form Login
      */
@@ -187,7 +187,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDangNhapActionPerformed
         // TODO add your handling code here:
-        if(accountbus.getList()==null){
+        if (accountbus.getList() == null) {
             try {
                 accountbus.listAccount();
             } catch (Exception ex) {
@@ -196,28 +196,30 @@ public class Login extends javax.swing.JFrame {
         }
         String username;
         char[] password;
-        username=txUsername.getText();
-        password=txPassword.getPassword();
-        AccountDTO account=accountbus.Check(username, password);
-        if(account==null){
+        username = txUsername.getText();
+        password = txPassword.getPassword();
+        AccountDTO account = accountbus.Check(username, password);
+        if (account == null) {
             JOptionPane.showMessageDialog(null, "Sai tên đăng nhập hoặc mật khẩu", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        MainMenu menu=new MainMenu(account.getUsername());
+        MainMenu menu = new MainMenu(account.getUsername());
         this.dispose();
         menu.setVisible(true);
     }//GEN-LAST:event_btDangNhapActionPerformed
 
     private void txUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txUsernameKeyPressed
         // TODO add your handling code here:
-         if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txPassword.requestFocus();
+        }
     }//GEN-LAST:event_txUsernameKeyPressed
 
     private void txPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txPasswordKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btDangNhap.doClick();
+        }
     }//GEN-LAST:event_txPasswordKeyPressed
 
     /**
@@ -265,29 +267,34 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField txPassword;
     private javax.swing.JTextField txUsername;
     // End of variables declaration//GEN-END:variables
-    class RoundedPanel extends JPanel
-    {
+    class RoundedPanel extends JPanel {
+
         private Color backgroundColor;
         private int cornerRadius = 15;
+
         public RoundedPanel(LayoutManager layout, int radius) {
             super(layout);
             cornerRadius = radius;
         }
+
         public RoundedPanel(LayoutManager layout, int radius, Color bgColor) {
             super(layout);
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         public RoundedPanel(int radius) {
             super();
             cornerRadius = radius;
-            
+
         }
+
         public RoundedPanel(int radius, Color bgColor) {
             super();
             cornerRadius = radius;
             backgroundColor = bgColor;
         }
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -302,7 +309,7 @@ public class Login extends javax.swing.JFrame {
             } else {
                 graphics.setColor(getBackground());
             }
-            graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
+            graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); //paint background
             graphics.setColor(getForeground());
 //            graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
 //             

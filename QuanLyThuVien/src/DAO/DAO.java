@@ -10,7 +10,8 @@ package DAO;
  * @author Lộc
  */
 public class DAO {
-    public static MyConnectUnit getDAO(){
+
+    public static MyConnectUnit getDAO() {
         return new MyConnectUnit("localhost", "root", "", "quanlythuvien?useUnicode=yes&characterEncoding=UTF8");
     }
 }

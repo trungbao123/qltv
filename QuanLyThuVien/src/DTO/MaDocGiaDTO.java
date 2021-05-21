@@ -10,9 +10,11 @@ package DTO;
  * @author 01042001
  */
 public class MaDocGiaDTO {
-    private String MaDG,HoLot,Ten;
-    public MaDocGiaDTO(){
-        
+
+    private String MaDG, HoLot, Ten;
+
+    public MaDocGiaDTO() {
+
     }
 
     public MaDocGiaDTO(String MaNV, String HoLot, String Ten) {
@@ -20,7 +22,6 @@ public class MaDocGiaDTO {
         this.HoLot = HoLot;
         this.Ten = Ten;
     }
-    
 
     public String getMaDG() {
         return MaDG;
@@ -45,5 +46,5 @@ public class MaDocGiaDTO {
     public void setTen(String Ten) {
         this.Ten = Ten;
     }
-    
+
 }

@@ -10,12 +10,13 @@ package DTO;
  * @author 01042001
  */
 public class PhieuPhatDTO {
-     private String MaPhieuMuon;
+
+    private String MaPhieuMuon;
     private String MaPhieuPhat;
     private int TongTien;
-    
-    public PhieuPhatDTO(){
-        
+
+    public PhieuPhatDTO() {
+
     }
 
     public String getMaPhieuMuon() {
@@ -41,5 +42,5 @@ public class PhieuPhatDTO {
     public void setTongTien(int TongTien) {
         this.TongTien = TongTien;
     }
-    
+
 }

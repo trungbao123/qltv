@@ -14,27 +14,28 @@ import DTO.TheLoaiDTO;
 import java.util.ArrayList;
 
 public class TheLoaiBUS {
+
     private ArrayList<TheLoaiDTO> listTheLoai;
-    
-    public TheLoaiBUS(){
-    
+
+    public TheLoaiBUS() {
+
     }
-    
-    public void listTheLoai() throws Exception{
-        TheLoaiDAO theloaidao=new TheLoaiDAO();
-        listTheLoai=new ArrayList<TheLoaiDTO>();
-        listTheLoai=theloaidao.list();
+
+    public void listTheLoai() throws Exception {
+        TheLoaiDAO theloaidao = new TheLoaiDAO();
+        listTheLoai = new ArrayList<TheLoaiDTO>();
+        listTheLoai = theloaidao.list();
     }
-    
+
     public void Add(TheLoaiDTO theloai) throws Exception {
         listTheLoai.add(theloai);
-        TheLoaiDAO theloaidao=new TheLoaiDAO();
+        TheLoaiDAO theloaidao = new TheLoaiDAO();
         theloaidao.Insert(theloai);
     }
-    
+
     public void Edit(TheLoaiDTO theloai) throws Exception {
-        for(int i=0;i<listTheLoai.size();i++) {
-            if(listTheLoai.get(i).getMaTheLoai().equals(theloai.getMaTheLoai())) {
+        for (int i = 0; i < listTheLoai.size(); i++) {
+            if (listTheLoai.get(i).getMaTheLoai().equals(theloai.getMaTheLoai())) {
                 listTheLoai.set(i, theloai);
                 TheLoaiDAO theloaidao = new TheLoaiDAO();
                 theloaidao.Update(theloai);
@@ -42,10 +43,10 @@ public class TheLoaiBUS {
             }
         }
     }
-    
+
     public void Remove(String MaTL) throws Exception {
-        for(TheLoaiDTO theloai: listTheLoai) {
-            if(theloai.getMaTheLoai().equals(MaTL)) {
+        for (TheLoaiDTO theloai : listTheLoai) {
+            if (theloai.getMaTheLoai().equals(MaTL)) {
                 listTheLoai.remove(theloai);
                 TheLoaiDAO theloaidao = new TheLoaiDAO();
                 theloaidao.Delete(MaTL);
@@ -53,26 +54,31 @@ public class TheLoaiBUS {
             }
         }
     }
-    
-    public ArrayList<TheLoaiDTO> Search(String MaTL, String TenTL){
-        ArrayList<TheLoaiDTO> res=new ArrayList<TheLoaiDTO>();
-        boolean matl=false, tentl=false;
-        if(MaTL.equals(""))
-            matl=true;
-        if(TenTL.equals(""))
-            tentl=true;
-        for(TheLoaiDTO tl: listTheLoai){
-            if(!MaTL.equals(""))
-                matl=(tl.getMaTheLoai().contains(MaTL)) ? true : false;
-            if(!TenTL.equals(""))
-                tentl=(tl.getTenTheLoai().contains(TenTL)) ? true : false;
-            if(matl && tentl)
+
+    public ArrayList<TheLoaiDTO> Search(String MaTL, String TenTL) {
+        ArrayList<TheLoaiDTO> res = new ArrayList<TheLoaiDTO>();
+        boolean matl = false, tentl = false;
+        if (MaTL.equals("")) {
+            matl = true;
+        }
+        if (TenTL.equals("")) {
+            tentl = true;
+        }
+        for (TheLoaiDTO tl : listTheLoai) {
+            if (!MaTL.equals("")) {
+                matl = (tl.getMaTheLoai().contains(MaTL)) ? true : false;
+            }
+            if (!TenTL.equals("")) {
+                tentl = (tl.getTenTheLoai().contains(TenTL)) ? true : false;
+            }
+            if (matl && tentl) {
                 res.add(tl);
+            }
         }
         return res;
     }
-    
-    public ArrayList<TheLoaiDTO> getList(){
+
+    public ArrayList<TheLoaiDTO> getList() {
         return listTheLoai;
     }
 }

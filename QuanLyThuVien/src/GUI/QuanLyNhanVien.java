@@ -10,7 +10,6 @@ package GUI;
  * @author Vy
  */
 import BUS.NhanVienBUS;
-import DAO.DAO;
 import DTO.NhanVienDTO;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,13 +17,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import java.awt.RenderingHints;
-import java.awt.event.KeyEvent;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -33,9 +29,8 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
 
     private DefaultTableModel modelNhanVien = new DefaultTableModel();
     private DefaultTableModel resOfSearch;
-    private int EditOrSearch=1;
-    private NhanVienBUS nvbus=new NhanVienBUS();
-  
+    private int EditOrSearch = 1;
+    private NhanVienBUS nvbus = new NhanVienBUS();
 
     /**
      * Creates new form QuanLyNhanVien
@@ -500,40 +495,40 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
 
     private void btTaoMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaoMoiActionPerformed
         // TODO add your handling code here:
-       
-            txMaNV.setText("");
-            txNgaySinh.setText("");
-            txHoLot.setText("");
-            txTen.setText("");
-            txSodt.setText("");
+
+        txMaNV.setText("");
+        txNgaySinh.setText("");
+        txHoLot.setText("");
+        txTen.setText("");
+        txSodt.setText("");
     }//GEN-LAST:event_btTaoMoiActionPerformed
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         // TODO add your handling code here:
-        if(!ValidateThemNhanVien())
-        return;
+        if (!ValidateThemNhanVien()) {
+            return;
+        }
 
-        NhanVienDTO nv=new NhanVienDTO();
+        NhanVienDTO nv = new NhanVienDTO();
 
         nv.setManv(txMaNV.getText());
         nv.setHolot(txHoLot.getText());
         nv.setTen(txTen.getText());
         nv.setNgaysinh(txNgaySinh.getText());
         nv.setDienthoai(txSodt.getText());
-        
+
         try {
             nvbus.Add(nv);
         } catch (Exception ex) {
             Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Vector row=new Vector();
+        Vector row = new Vector();
         row.add(nv.getManv());
         row.add(nv.getHolot());
         row.add(nv.getTen());
         row.add(nv.getNgaysinh());
         row.add(nv.getDienthoai());
-       
 
         modelNhanVien.addRow(row);
 
@@ -543,7 +538,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         // TODO add your handling code here:
         int i = tbNhanVien.getSelectedRow();
-        if(nvbus.getList().size()>0){
+        if (nvbus.getList().size() > 0) {
             try {
                 nvbus.Remove(nvbus.getList().get(i).getManv());
             } catch (Exception ex) {
@@ -562,21 +557,21 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
 
     private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
         // TODO add your handling code here:
-        int i=tbNhanVien.getSelectedRow();
-        if(i<0){
+        int i = tbNhanVien.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chọn Nhân Viên cần chỉnh sửa", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        EditOrSearch=1;
+        EditOrSearch = 1;
         txMaNV.setEditable(false);
-        
+
         btThem.setEnabled(false);
         btXoa.setEnabled(false);
         btTim.setEnabled(false);
         btTatCa.setEnabled(false);
         btNhapEx.setEnabled(false);
         btXuatEx.setEnabled(false);
-       
+
         btXacNhan.setText("Sửa");
         btXacNhan.setVisible(true);
         btHuy.setVisible(true);
@@ -584,7 +579,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
 
     private void btTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimActionPerformed
         // TODO add your handling code here:
-        EditOrSearch=0;
+        EditOrSearch = 0;
         btXacNhan.setText("Tìm");
         btXacNhan.setVisible(true);
         btHuy.setVisible(true);
@@ -596,23 +591,23 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
 
     private void btTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTatCaActionPerformed
         // TODO add your handling code here:
-        if (nvbus.getList().size()>0)
-        tbNhanVien.setModel(modelNhanVien);
+        if (nvbus.getList().size() > 0) {
+            tbNhanVien.setModel(modelNhanVien);
+        }
     }//GEN-LAST:event_btTatCaActionPerformed
 
     private void btXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXacNhanActionPerformed
         // TODO add your handling code here:
-        if(EditOrSearch==1){
+        if (EditOrSearch == 1) {
             Edit();
-        }
-        else{
+        } else {
             Search();
         }
     }//GEN-LAST:event_btXacNhanActionPerformed
 
     private void btHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyActionPerformed
         // TODO add your handling code here:
-        if(EditOrSearch==1){
+        if (EditOrSearch == 1) {
             txMaNV.setEditable(true);
             tbNhanVien.setEnabled(true);
             btThem.setEnabled(true);
@@ -623,8 +618,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             btXuatEx.setEnabled(true);
             btXacNhan.setVisible(false);
             btHuy.setVisible(false);
-        }
-        else{
+        } else {
             btXacNhan.setVisible(false);
             btHuy.setVisible(false);
         }
@@ -672,36 +666,38 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             txSodt.setText(nv.getDienthoai());
         }
     }//GEN-LAST:event_tbNhanVienMouseClicked
- 
-    public void List() throws Exception{
-        if(nvbus.getList()==null)
+
+    public void List() throws Exception {
+        if (nvbus.getList() == null) {
             nvbus.listNhanVien();
+        }
         ArrayList<NhanVienDTO> listNhanVien = nvbus.getList();
-        Vector header=new Vector();
+        Vector header = new Vector();
         header.add("Mã nhân viên");
         header.add("Họ lót");
         header.add("Tên");
         header.add("Ngày Sinh");
         header.add("Số điện thoại");
-        if (modelNhanVien.getRowCount() == 0) 
-                modelNhanVien = new DefaultTableModel(header, 0);
-        for(NhanVienDTO nv: listNhanVien) {
-            Vector row=new Vector();
+        if (modelNhanVien.getRowCount() == 0) {
+            modelNhanVien = new DefaultTableModel(header, 0);
+        }
+        for (NhanVienDTO nv : listNhanVien) {
+            Vector row = new Vector();
             row.add(nv.getManv());
             row.add(nv.getHolot());
             row.add(nv.getTen());
             row.add(nv.getNgaysinh());
             row.add(nv.getDienthoai());
-            
+
             modelNhanVien.addRow(row);
         }
         tbNhanVien.setModel(modelNhanVien);
     }
-    
-    private void Edit(){
-        int i=tbNhanVien.getSelectedRow();
-        if(nvbus.getList().size()>0){
-            NhanVienDTO nv=new NhanVienDTO();
+
+    private void Edit() {
+        int i = tbNhanVien.getSelectedRow();
+        if (nvbus.getList().size() > 0) {
+            NhanVienDTO nv = new NhanVienDTO();
 
             nv.setManv(txMaNV.getText());
             nv.setHolot(txHoLot.getText());
@@ -724,80 +720,79 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             tbNhanVien.setModel(modelNhanVien);
         }
     }
-    public static void setManv(String TenNV){
+
+    public static void setManv(String TenNV) {
         txMaNV.setText(TenNV);
     }
-    private void Search(){
-        if(nvbus.getList().isEmpty()){
+
+    private void Search() {
+        if (nvbus.getList().isEmpty()) {
             return;
         }
 
         String MaNV, HoLot, Ten, NgaySinh, Sodt;
 
-        MaNV=txMaNV.getText();
-        HoLot=txHoLot.getText();
-        Ten=txTen.getText();
-        NgaySinh=txNgaySinh.getText();
-        Sodt=txSodt.getText();
-       
-        ArrayList<NhanVienDTO> res=new ArrayList<NhanVienDTO>();
+        MaNV = txMaNV.getText();
+        HoLot = txHoLot.getText();
+        Ten = txTen.getText();
+        NgaySinh = txNgaySinh.getText();
+        Sodt = txSodt.getText();
+
+        ArrayList<NhanVienDTO> res = new ArrayList<NhanVienDTO>();
         try {
-            res=nvbus.Search(MaNV, HoLot, Ten, NgaySinh, Sodt);
+            res = nvbus.Search(MaNV, HoLot, Ten, NgaySinh, Sodt);
         } catch (Exception ex) {
             Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (res.size()==0)
+        if (res.size() == 0) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        } else {
             Vector header = new Vector();
             header.add("Mã Nhân Viên");
             header.add("Họ Lót");
             header.add("Tên");
             header.add("Ngày Sinh");
             header.add("Số Điện Thoại");
-           
+
             resOfSearch = new DefaultTableModel(header, 0);
-            for(NhanVienDTO s: res){
-                Vector row=new Vector();
+            for (NhanVienDTO s : res) {
+                Vector row = new Vector();
                 row.add(s.getManv());
                 row.add(s.getHolot());
                 row.add(s.getTen());
                 row.add(s.getNgaysinh());
                 row.add(s.getDienthoai());
-               
+
                 resOfSearch.addRow(row);
             }
             tbNhanVien.setModel(resOfSearch);
         }
     }
-   
-    
-    private boolean ValidateThemNhanVien(){
+
+    private boolean ValidateThemNhanVien() {
         String manv, HoLot, Ten, NgaySinh, Sodt;
-        manv=txMaNV.getText();
-        HoLot=txHoLot.getText();
-        Ten=txTen.getText();
-        NgaySinh=txNgaySinh.getText();
-        Sodt=txSodt.getText();
-       
-        
-        if(manv.equals("") || HoLot.equals("") || Ten.equals("") || NgaySinh.equals("") || Sodt.equals("")){
+        manv = txMaNV.getText();
+        HoLot = txHoLot.getText();
+        Ten = txTen.getText();
+        NgaySinh = txNgaySinh.getText();
+        Sodt = txSodt.getText();
+
+        if (manv.equals("") || HoLot.equals("") || Ten.equals("") || NgaySinh.equals("") || Sodt.equals("")) {
             JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        
-        for(NhanVienDTO nv: nvbus.getList()){
-            if(manv.equals(nv.getManv())){
+
+        for (NhanVienDTO nv : nvbus.getList()) {
+            if (manv.equals(nv.getManv())) {
                 JOptionPane.showMessageDialog(null, "Mã nhân viên đã tồn tại", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
                 return false;
             }
         }
-        
-        
+
         return true;
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -828,10 +823,10 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                QuanLyNhanVien QLNV=new QuanLyNhanVien();
+                QuanLyNhanVien QLNV = new QuanLyNhanVien();
                 try {
-                    QLNV.List();          
-                } catch (Exception ex) { 
+                    QLNV.List();
+                } catch (Exception ex) {
                     Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 QLNV.setVisible(true);
@@ -870,46 +865,52 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     private static javax.swing.JTextField txTen;
     // End of variables declaration//GEN-END:variables
 }
- class RoundedPanel extends JPanel
-    {
-        private Color backgroundColor;
-        private int cornerRadius = 15;
-        public RoundedPanel(LayoutManager layout, int radius) {
-            super(layout);
-            cornerRadius = radius;
+
+class RoundedPanel extends JPanel {
+
+    private Color backgroundColor;
+    private int cornerRadius = 15;
+
+    public RoundedPanel(LayoutManager layout, int radius) {
+        super(layout);
+        cornerRadius = radius;
+    }
+
+    public RoundedPanel(LayoutManager layout, int radius, Color bgColor) {
+        super(layout);
+        cornerRadius = radius;
+        backgroundColor = bgColor;
+    }
+
+    public RoundedPanel(int radius) {
+        super();
+        cornerRadius = radius;
+
+    }
+
+    public RoundedPanel(int radius, Color bgColor) {
+        super();
+        cornerRadius = radius;
+        backgroundColor = bgColor;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Dimension arcs = new Dimension(cornerRadius, cornerRadius);
+        int width = getWidth();
+        int height = getHeight();
+        Graphics2D graphics = (Graphics2D) g;
+        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        //Draws the rounded panel with borders.
+        if (backgroundColor != null) {
+            graphics.setColor(backgroundColor);
+        } else {
+            graphics.setColor(getBackground());
         }
-        public RoundedPanel(LayoutManager layout, int radius, Color bgColor) {
-            super(layout);
-            cornerRadius = radius;
-            backgroundColor = bgColor;
-        }
-        public RoundedPanel(int radius) {
-            super();
-            cornerRadius = radius;
-            
-        }
-        public RoundedPanel(int radius, Color bgColor) {
-            super();
-            cornerRadius = radius;
-            backgroundColor = bgColor;
-        }
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            Dimension arcs = new Dimension(cornerRadius, cornerRadius);
-            int width = getWidth();
-            int height = getHeight();
-            Graphics2D graphics = (Graphics2D) g;
-            graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            //Draws the rounded panel with borders.
-            if (backgroundColor != null) {
-                graphics.setColor(backgroundColor);
-            } else {
-                graphics.setColor(getBackground());
-            }
-            graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
-            graphics.setColor(getForeground());
+        graphics.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height); //paint background
+        graphics.setColor(getForeground());
 //            graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border
 //             
-        }
     }
+}

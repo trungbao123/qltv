@@ -9,30 +9,8 @@ import BUS.PhieuMuonBUS;
 import DTO.PhieuMuonDTO;
 import BUS.ChiTietPhieuMuonBUS;
 import DTO.ChiTietPhieuMuonDTO;
-import BUS.SachBUS;
-import DTO.SachDTO;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.LayoutManager;
-import java.awt.RenderingHints;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import java.util.List;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,19 +24,21 @@ import javax.swing.JOptionPane;
  * @author 01042001
  */
 public class QuanLyMuonTra extends javax.swing.JFrame {
+
     private DefaultTableModel modelPhieuMuon = new DefaultTableModel();
     private DefaultTableModel modelChitiet = new DefaultTableModel();
     private DefaultTableModel resOfSearch;
     private int EditOrSearch;
-    private PhieuMuonBUS phieumuonbus=new PhieuMuonBUS();
-    private ChiTietPhieuMuonBUS chitietbus=new ChiTietPhieuMuonBUS();
+    private PhieuMuonBUS phieumuonbus = new PhieuMuonBUS();
+    private ChiTietPhieuMuonBUS chitietbus = new ChiTietPhieuMuonBUS();
+
     /**
      * Creates new form QuanLyMuonTra
      */
-    
+
     public QuanLyMuonTra() {
         initComponents();
-         tbPhieuMuon.addMouseListener(new MouseListener() {
+        tbPhieuMuon.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
 
@@ -84,7 +64,7 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
 
             }
         });
-         tbChitiet.addMouseListener(new MouseListener() {
+        tbChitiet.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent me) {
 
@@ -111,6 +91,7 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
             }
         });
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -894,7 +875,7 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
 
     private void btMaDocGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMaDocGiaActionPerformed
         // TODO add your handling code here:
-        MaDocGiaSelector MaDGSel=new  MaDocGiaSelector();
+        MaDocGiaSelector MaDGSel = new MaDocGiaSelector();
         try {
             MaDGSel.List();
         } catch (Exception ex) {
@@ -905,7 +886,7 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
 
     private void btMaNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMaNhanVienActionPerformed
         // TODO add your handling code here:
-        MaNhanVienSelector MaNVSel=new  MaNhanVienSelector();
+        MaNhanVienSelector MaNVSel = new MaNhanVienSelector();
         try {
             MaNVSel.List();
         } catch (Exception ex) {
@@ -917,37 +898,37 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         // TODO add your handling code here:
         // if(!ValidateThemPhieuMuon())
-            //return;
-       
-        PhieuMuonDTO phieumuon=new PhieuMuonDTO();
-        
+        //return;
+
+        PhieuMuonDTO phieumuon = new PhieuMuonDTO();
+
         phieumuon.setMaPhieuMuon(tfMaPhieuMuon.getText());
         phieumuon.setMaDocGia(tfMaDocGia.getText());
         phieumuon.setMaNhanVien(tfMaNhanVien.getText());
         phieumuon.setNgayMuon(tfNgayMuon.getText());
         phieumuon.setNgayHenTra(tfNgayHenTra.getText());
-        
+
         try {
             phieumuonbus.Add(phieumuon);
         } catch (Exception ex) {
             Logger.getLogger(QuanLyMuonTra.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Vector row=new Vector();
+
+        Vector row = new Vector();
         row.add(phieumuon.getMaPhieuMuon());
         row.add(phieumuon.getMaDocGia());
         row.add(phieumuon.getMaNhanVien());
         row.add(phieumuon.getNgayMuon());
         row.add(phieumuon.getNgayHenTra());
-        
+
         modelPhieuMuon.addRow(row);
-        
+
         tbPhieuMuon.setModel(modelPhieuMuon);
     }//GEN-LAST:event_btThemActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
         int i = tbPhieuMuon.getSelectedRow();
-        if(phieumuonbus.getList().size()>0){
+        if (phieumuonbus.getList().size() > 0) {
             try {
                 phieumuonbus.Remove(phieumuonbus.getList().get(i).getMaPhieuMuon());
             } catch (Exception ex) {
@@ -955,7 +936,7 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
             }
             modelPhieuMuon.removeRow(i);
             tbPhieuMuon.setModel(modelPhieuMuon);
-            
+
             tfMaPhieuMuon.setText("");
             tfMaDocGia.setText("");
             tfMaNhanVien.setText("");
@@ -971,7 +952,7 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Chọn phiếu mượn cần chỉnh sửa", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        EditOrSearch=1;
+        EditOrSearch = 1;
         tfMaPhieuMuon.setEditable(false);
         tbPhieuMuon.setEnabled(false);
         btThem.setEnabled(false);
@@ -985,20 +966,22 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
 
     private void btTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimActionPerformed
         // TODO add your handling code here:
-         EditOrSearch=0;
+        EditOrSearch = 0;
         btXacNhan.setText("Tìm");
         btXacNhan.setVisible(true);
         btHuy.setVisible(true);
     }//GEN-LAST:event_btTimActionPerformed
 
     private void btTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTatCaActionPerformed
-        if (phieumuonbus.getList().size()>0)
+        if (phieumuonbus.getList().size() > 0) {
             tbPhieuMuon.setModel(modelPhieuMuon);
+        }
     }//GEN-LAST:event_btTatCaActionPerformed
 
     private void btTaoMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaoMoiActionPerformed
-        if(tbPhieuMuon.isEnabled())
+        if (tbPhieuMuon.isEnabled()) {
             tfMaPhieuMuon.setText("");
+        }
         /*if(EditOrSearch==0){
             tf.setText("");
             txSoLuongMax.setText("");
@@ -1011,16 +994,15 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
     }//GEN-LAST:event_btTaoMoiActionPerformed
 
     private void btXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXacNhanActionPerformed
-        if(EditOrSearch==1){       
+        if (EditOrSearch == 1) {
             Edit();
-        }
-        else{       
+        } else {
             Search();
         }
     }//GEN-LAST:event_btXacNhanActionPerformed
 
     private void btHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHuyActionPerformed
-         if(EditOrSearch==1){
+        if (EditOrSearch == 1) {
             tfMaPhieuMuon.setEditable(true);
             tbPhieuMuon.setEnabled(true);
             btThem.setEnabled(true);
@@ -1031,10 +1013,9 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
             //btXuatEx.setEnabled(true);
             btXacNhan.setVisible(false);
             btHuy.setVisible(false);
-        }
-        else{
+        } else {
             btXacNhan.setVisible(false);
-            btHuy.setVisible(false); 
+            btHuy.setVisible(false);
         }
     }//GEN-LAST:event_btHuyActionPerformed
 
@@ -1048,7 +1029,7 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
 
     private void btMaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMaSachActionPerformed
         // TODO add your handling code here:
-        MaSachSelector MaSachSel=new  MaSachSelector();
+        MaSachSelector MaSachSel = new MaSachSelector();
         try {
             MaSachSel.List();
         } catch (Exception ex) {
@@ -1063,42 +1044,42 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
 
     private void btThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThem1ActionPerformed
         // TODO add your handling code here:
-        ChiTietPhieuMuonDTO ctphieumuon=new ChiTietPhieuMuonDTO();
-        
+        ChiTietPhieuMuonDTO ctphieumuon = new ChiTietPhieuMuonDTO();
+
         ctphieumuon.setMaPhieuMuon(tfMaPmChiTiet.getText());
         ctphieumuon.setMaSach(tfMaSach.getText());
         ctphieumuon.setSoLuong(Integer.parseInt(tfSoLuong.getText()));
-        
+
         try {
             chitietbus.Add(ctphieumuon);
         } catch (Exception ex) {
             Logger.getLogger(QuanLyMuonTra.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        Vector row=new Vector();
+
+        Vector row = new Vector();
         row.add(ctphieumuon.getMaPhieuMuon());
         row.add(ctphieumuon.getMaSach());
         row.add(ctphieumuon.getSoLuong());
-        
+
         modelChitiet.addRow(row);
-        
+
         tbChitiet.setModel(modelChitiet);
     }//GEN-LAST:event_btThem1ActionPerformed
 
     private void btXoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoa1ActionPerformed
         // TODO add your handling code here:
         int i = tbChitiet.getSelectedRow();
-        if(chitietbus.getList().size()>0){
+        if (chitietbus.getList().size() > 0) {
             try {
-                chitietbus.Remove(chitietbus.getList().get(i).getMaPhieuMuon(), 
-                                                    chitietbus.getList().get(i).getMaSach(), 
-                                                    chitietbus.getList().get(i).getSoLuong());
+                chitietbus.Remove(chitietbus.getList().get(i).getMaPhieuMuon(),
+                        chitietbus.getList().get(i).getMaSach(),
+                        chitietbus.getList().get(i).getSoLuong());
             } catch (Exception ex) {
                 Logger.getLogger(QuanLyMuonTra.class.getName()).log(Level.SEVERE, null, ex);
             }
             modelChitiet.removeRow(i);
             tbChitiet.setModel(modelChitiet);
-            
+
             tfMaPmChiTiet.setText("");
             tfMaSach.setText("");
             tfSoLuong.setText("");
@@ -1111,13 +1092,16 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
         if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chọn chi tiết phiếu mượn cần chỉnh sửa", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
-        } else EditCt();
+        } else {
+            EditCt();
+        }
     }//GEN-LAST:event_btSua1ActionPerformed
 
     private void btTaoMoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTaoMoi1ActionPerformed
         // TODO add your handling code here:
-        if(tbChitiet.isEnabled())
+        if (tbChitiet.isEnabled()) {
             tfMaPmChiTiet.setText("");
+        }
         /*if(EditOrSearch==0){
             tf.setText("");
             txSoLuongMax.setText("");
@@ -1128,13 +1112,14 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
     }//GEN-LAST:event_btTaoMoi1ActionPerformed
 
     private void btTimCtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTimCtActionPerformed
-         Searchct();
+        Searchct();
     }//GEN-LAST:event_btTimCtActionPerformed
 
     private void btAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAllActionPerformed
         // TODO add your handling code here:
-         if (chitietbus.getList().size()>0)
+        if (chitietbus.getList().size() > 0) {
             tbChitiet.setModel(modelChitiet);
+        }
     }//GEN-LAST:event_btAllActionPerformed
 
     private void btDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDongActionPerformed
@@ -1144,15 +1129,14 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
 
     private void btChon3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChon3ActionPerformed
         // TODO add your handling code here:
-        int i=tbPhieuMuon.getSelectedRow();
-        if(i<0){
+        int i = tbPhieuMuon.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chưa chọn mã hóa đơn", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        try{
+        try {
             QuanLyPhieuPhat.setMaPhieuMuon(phieumuonbus.getList().get(i).getMaPhieuMuon());
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex);
         }
         this.dispose();
@@ -1160,34 +1144,35 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
 
     private void btChon4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChon4ActionPerformed
         // TODO add your handling code here:
-         int i=tbChitiet.getSelectedRow();
-        if(i<0){
+        int i = tbChitiet.getSelectedRow();
+        if (i < 0) {
             JOptionPane.showMessageDialog(null, "Chưa chọn mã sách", "Chú ý!", JOptionPane.INFORMATION_MESSAGE);
             return;
-        }   
-        try{
-            QuanLyPhieuPhat.setMaSach(chitietbus.getList().get(i).getMaSach());
         }
-        catch (Exception ex){
+        try {
+            QuanLyPhieuPhat.setMaSach(chitietbus.getList().get(i).getMaSach());
+        } catch (Exception ex) {
             System.out.println(ex);
         }
         this.dispose();
     }//GEN-LAST:event_btChon4ActionPerformed
 
-    public void ListPhieuMuon() throws Exception{
-        if(phieumuonbus.getList()==null)
-             phieumuonbus.listPhieuMuon();
+    public void ListPhieuMuon() throws Exception {
+        if (phieumuonbus.getList() == null) {
+            phieumuonbus.listPhieuMuon();
+        }
         ArrayList<PhieuMuonDTO> listPhieuMuon = phieumuonbus.getList();
-        Vector header=new Vector();
+        Vector header = new Vector();
         header.add("Mã Phiếu Mượn");
         header.add("Mã Đọc Giả");
         header.add("Mã Nhân Viên");
         header.add("Ngày Mượn");
         header.add("Ngày Hẹn Trả");
-        if(modelPhieuMuon.getRowCount() == 0)
-                modelPhieuMuon = new DefaultTableModel(header, 0);
-        for(PhieuMuonDTO ctphieumuon: listPhieuMuon) {
-            Vector row=new Vector();
+        if (modelPhieuMuon.getRowCount() == 0) {
+            modelPhieuMuon = new DefaultTableModel(header, 0);
+        }
+        for (PhieuMuonDTO ctphieumuon : listPhieuMuon) {
+            Vector row = new Vector();
             row.add(ctphieumuon.getMaPhieuMuon());
             row.add(ctphieumuon.getMaDocGia());
             row.add(ctphieumuon.getMaNhanVien());
@@ -1197,18 +1182,21 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
         }
         tbPhieuMuon.setModel(modelPhieuMuon);
     }
-    public void ListChiTiet() throws Exception{
-        if(chitietbus.getList()==null)
+
+    public void ListChiTiet() throws Exception {
+        if (chitietbus.getList() == null) {
             chitietbus.listChiTietPhieuMuon();
+        }
         ArrayList<ChiTietPhieuMuonDTO> listChiTiet = chitietbus.getList();
         Vector header = new Vector();
         header.add("Mã Phiếu Nhập");
         header.add("Mã Sách");
         header.add("Số Lượng");
-        if(modelChitiet.getRowCount() == 0)
+        if (modelChitiet.getRowCount() == 0) {
             modelChitiet = new DefaultTableModel(header, 0);
-        for(ChiTietPhieuMuonDTO chitiet: listChiTiet){
-            Vector row=new Vector();
+        }
+        for (ChiTietPhieuMuonDTO chitiet : listChiTiet) {
+            Vector row = new Vector();
             row.add(chitiet.getMaPhieuMuon());
             row.add(chitiet.getMaSach());
             row.add(chitiet.getSoLuong());
@@ -1216,42 +1204,45 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
         }
         tbChitiet.setModel(modelChitiet);
     }
+
     private void Onclick() {
         int i = tbPhieuMuon.getSelectedRow();
         if (phieumuonbus.getList().size() > 0) {
             PhieuMuonDTO ctphieumuon = new PhieuMuonDTO();
             ctphieumuon = phieumuonbus.getList().get(i);
-            
-           tfMaPhieuMuon.setText(ctphieumuon.getMaPhieuMuon());
-           tfMaNhanVien.setText(ctphieumuon.getMaNhanVien());
-           tfMaDocGia.setText(ctphieumuon.getMaDocGia());
-           tfNgayMuon.setText(ctphieumuon.getNgayMuon());
-           tfNgayHenTra.setText(ctphieumuon.getNgayHenTra());
-           tfMaPmChiTiet.setText(ctphieumuon.getMaPhieuMuon());
+
+            tfMaPhieuMuon.setText(ctphieumuon.getMaPhieuMuon());
+            tfMaNhanVien.setText(ctphieumuon.getMaNhanVien());
+            tfMaDocGia.setText(ctphieumuon.getMaDocGia());
+            tfNgayMuon.setText(ctphieumuon.getNgayMuon());
+            tfNgayHenTra.setText(ctphieumuon.getNgayHenTra());
+            tfMaPmChiTiet.setText(ctphieumuon.getMaPhieuMuon());
         }
     }
+
     private void Onclickct() {
         int ict = tbChitiet.getSelectedRow();
-        if(chitietbus.getList().size()>0){
-            ChiTietPhieuMuonDTO chitiet =new ChiTietPhieuMuonDTO();
+        if (chitietbus.getList().size() > 0) {
+            ChiTietPhieuMuonDTO chitiet = new ChiTietPhieuMuonDTO();
             chitiet = chitietbus.getList().get(ict);
-            
+
             tfMaPmChiTiet.setText(chitiet.getMaPhieuMuon());
             tfMaSach.setText(chitiet.getMaSach());
             tfSoLuong.setText(String.valueOf(chitiet.getSoLuong()));
         }
     }
-    private void Edit(){
-        int i=tbPhieuMuon.getSelectedRow();
-        if(phieumuonbus.getList().size()>0){
-            PhieuMuonDTO phieumuon=new PhieuMuonDTO();
+
+    private void Edit() {
+        int i = tbPhieuMuon.getSelectedRow();
+        if (phieumuonbus.getList().size() > 0) {
+            PhieuMuonDTO phieumuon = new PhieuMuonDTO();
 
             phieumuon.setMaPhieuMuon(tfMaPhieuMuon.getText());
             phieumuon.setMaDocGia(tfMaDocGia.getText());
             phieumuon.setMaNhanVien(tfMaNhanVien.getText());
             phieumuon.setNgayMuon(tfNgayMuon.getText());
             phieumuon.setNgayHenTra(tfNgayHenTra.getText());
-            
+
             try {
                 phieumuonbus.Edit(phieumuon);
             } catch (Exception ex) {
@@ -1277,15 +1268,16 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
         btXacNhan.setVisible(false);
         btHuy.setVisible(false);
     }
-    private void EditCt(){
-        int i=tbChitiet.getSelectedRow();
-        if(chitietbus.getList().size()>0){
-           ChiTietPhieuMuonDTO ctphieumuon=new ChiTietPhieuMuonDTO();
+
+    private void EditCt() {
+        int i = tbChitiet.getSelectedRow();
+        if (chitietbus.getList().size() > 0) {
+            ChiTietPhieuMuonDTO ctphieumuon = new ChiTietPhieuMuonDTO();
 
             ctphieumuon.setMaPhieuMuon(tfMaPmChiTiet.getText());
             ctphieumuon.setMaSach(tfMaSach.getText());
             ctphieumuon.setSoLuong(Integer.parseInt(tfSoLuong.getText()));
-            
+
             try {
                 chitietbus.Edit(ctphieumuon);
             } catch (Exception ex) {
@@ -1299,30 +1291,30 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
             tbChitiet.setModel(modelChitiet);
         }
     }
-    
-    private void Search(){
-        if(phieumuonbus.getList().isEmpty()){
+
+    private void Search() {
+        if (phieumuonbus.getList().isEmpty()) {
             return;
         }
 
         String MaPhieuMuon, MaDocGia, MaNhanVien, NgayMuon, NgayHenTra;
 
-        MaPhieuMuon=tfMaPhieuMuon.getText();
-        MaDocGia=tfMaDocGia.getText();
-        MaNhanVien=tfMaNhanVien.getText();
-        NgayMuon=tfNgayMuon.getText();
-         NgayHenTra=tfNgayHenTra.getText();
+        MaPhieuMuon = tfMaPhieuMuon.getText();
+        MaDocGia = tfMaDocGia.getText();
+        MaNhanVien = tfMaNhanVien.getText();
+        NgayMuon = tfNgayMuon.getText();
+        NgayHenTra = tfNgayHenTra.getText();
 
-        ArrayList<PhieuMuonDTO> res=new ArrayList<PhieuMuonDTO>();
+        ArrayList<PhieuMuonDTO> res = new ArrayList<PhieuMuonDTO>();
         try {
-            res=phieumuonbus.Search(MaPhieuMuon, MaDocGia, MaNhanVien, NgayMuon, NgayHenTra);
+            res = phieumuonbus.Search(MaPhieuMuon, MaDocGia, MaNhanVien, NgayMuon, NgayHenTra);
         } catch (Exception ex) {
             Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (res.size()==0)
+        if (res.size() == 0) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        } else {
             Vector header = new Vector();
             header.add("Mã Phiếu Mượn");
             header.add("Mã Đọc Giả");
@@ -1330,8 +1322,8 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
             header.add("Ngày Nhập");
             header.add("Ngày Hẹn Trả");
             resOfSearch = new DefaultTableModel(header, 0);
-            for(PhieuMuonDTO s: res){
-                Vector row=new Vector();
+            for (PhieuMuonDTO s : res) {
+                Vector row = new Vector();
                 row.add(s.getMaPhieuMuon());
                 row.add(s.getMaDocGia());
                 row.add(s.getMaNhanVien());
@@ -1342,38 +1334,40 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
             tbPhieuMuon.setModel(resOfSearch);
         }
     }
-    private void Searchct(){
-        if(chitietbus.getList().isEmpty()){
+
+    private void Searchct() {
+        if (chitietbus.getList().isEmpty()) {
             return;
         }
 
         String MaPhieuMuon, MaSach;
         int SoLuong;
 
-        MaPhieuMuon=tfMaPmChiTiet.getText();
-        MaSach=tfMaSach.getText();
-        if(tfSoLuong.getText().equals(""))
-            SoLuong=-1;
-        else
-            SoLuong=Integer.parseInt(tfSoLuong.getText());
+        MaPhieuMuon = tfMaPmChiTiet.getText();
+        MaSach = tfMaSach.getText();
+        if (tfSoLuong.getText().equals("")) {
+            SoLuong = -1;
+        } else {
+            SoLuong = Integer.parseInt(tfSoLuong.getText());
+        }
 
-        ArrayList<ChiTietPhieuMuonDTO> res=new ArrayList<ChiTietPhieuMuonDTO>();
+        ArrayList<ChiTietPhieuMuonDTO> res = new ArrayList<ChiTietPhieuMuonDTO>();
         try {
-            res=chitietbus.Search(MaPhieuMuon, MaSach, SoLuong);
+            res = chitietbus.Search(MaPhieuMuon, MaSach, SoLuong);
         } catch (Exception ex) {
             Logger.getLogger(QuanLySach.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (res.size()==0)
+        if (res.size() == 0) {
             JOptionPane.showMessageDialog(null, "Không tìm thấy kết quả nào!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        else{
+        } else {
             Vector header = new Vector();
             header.add("Mã Phiếu Mượn");
             header.add("Mã Sách");
             header.add("Số Lượng");
             resOfSearch = new DefaultTableModel(header, 0);
-            for(ChiTietPhieuMuonDTO s: res){
-                Vector row=new Vector();
+            for (ChiTietPhieuMuonDTO s : res) {
+                Vector row = new Vector();
                 row.add(s.getMaPhieuMuon());
                 row.add(s.getMaSach());
                 row.add(s.getSoLuong());
@@ -1382,15 +1376,19 @@ public class QuanLyMuonTra extends javax.swing.JFrame {
             tbChitiet.setModel(resOfSearch);
         }
     }
-      public static  void setMaSach(String MaSach){
-                tfMaSach.setText(MaSach);
+
+    public static void setMaSach(String MaSach) {
+        tfMaSach.setText(MaSach);
     }
-      public static  void setMaNV(String MaNV){
-                tfMaNhanVien.setText(MaNV);
+
+    public static void setMaNV(String MaNV) {
+        tfMaNhanVien.setText(MaNV);
     }
-      public static  void setMaDG(String MaDG){
-                tfMaDocGia.setText(MaDG);
+
+    public static void setMaDG(String MaDG) {
+        tfMaDocGia.setText(MaDG);
     }
+
     /**
      * @param args the command line arguments
      */

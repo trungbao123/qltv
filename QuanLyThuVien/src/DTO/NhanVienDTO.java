@@ -10,18 +10,19 @@ package DTO;
  * @author Vy
  */
 public class NhanVienDTO {
+
     private String manv;
     private String holot;
     private String ten;
     private String ngaysinh;
     private String dienthoai;
-    
-    public NhanVienDTO(){
-        manv=null;
-        holot=null;
-        ten=null;
-        ngaysinh=null;
-        dienthoai=null;
+
+    public NhanVienDTO() {
+        manv = null;
+        holot = null;
+        ten = null;
+        ngaysinh = null;
+        dienthoai = null;
 
     }
 
@@ -71,5 +72,5 @@ public class NhanVienDTO {
 
     public void setDienthoai(String dienthoai) {
         this.dienthoai = dienthoai;
-    }   
+    }
 }

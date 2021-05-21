@@ -10,11 +10,12 @@ package DTO;
  * @author 01042001
  */
 public class MaSachDTO {
+
     private String MaSach;
     private String TenSach;
-    
-    public MaSachDTO(){
-        
+
+    public MaSachDTO() {
+
     }
 
     public MaSachDTO(String MaSach, String TenSach) {
@@ -37,5 +38,5 @@ public class MaSachDTO {
     public void setTenSach(String TenSach) {
         this.TenSach = TenSach;
     }
-    
+
 }
