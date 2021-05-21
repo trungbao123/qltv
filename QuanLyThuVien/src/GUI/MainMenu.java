@@ -43,16 +43,16 @@ public class MainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        btDanhMuc = new javax.swing.JButton();
+        btThongKe = new javax.swing.JButton();
+        btQLPhieuPhat = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new RoundedPanel(50, new Color(20, 20, 50));
         btQLSach = new javax.swing.JButton();
         btQLDocGia = new javax.swing.JButton();
         btQLMuonTra = new javax.swing.JButton();
         btQLNhapHang = new javax.swing.JButton();
-        btThongKe = new javax.swing.JButton();
         btQLNhanVien = new javax.swing.JButton();
-        btDanhMuc = new javax.swing.JButton();
-        btQLPhieuPhat = new javax.swing.JButton();
         jPanel3 = new RoundedPanel(10, new Color(68, 187, 236));
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new RoundedPanel(10, new Color(165, 201, 63));
@@ -60,6 +60,54 @@ public class MainMenu extends javax.swing.JFrame {
         btThoat = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
+
+        btDanhMuc.setBackground(new java.awt.Color(27, 26, 67));
+        btDanhMuc.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btDanhMuc.setForeground(new java.awt.Color(255, 255, 255));
+        btDanhMuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconImages/list.png"))); // NOI18N
+        btDanhMuc.setText("DANH MỤC");
+        btDanhMuc.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btDanhMuc.setBorderPainted(false);
+        btDanhMuc.setFocusPainted(false);
+        btDanhMuc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btDanhMuc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btDanhMuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDanhMucActionPerformed(evt);
+            }
+        });
+
+        btThongKe.setBackground(new java.awt.Color(27, 26, 67));
+        btThongKe.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btThongKe.setForeground(new java.awt.Color(255, 255, 255));
+        btThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconImages/chart.png"))); // NOI18N
+        btThongKe.setText(" THỐNG KÊ");
+        btThongKe.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btThongKe.setBorderPainted(false);
+        btThongKe.setFocusPainted(false);
+        btThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btThongKe.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btThongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThongKeActionPerformed(evt);
+            }
+        });
+
+        btQLPhieuPhat.setBackground(new java.awt.Color(27, 26, 67));
+        btQLPhieuPhat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btQLPhieuPhat.setForeground(new java.awt.Color(255, 255, 255));
+        btQLPhieuPhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconImages/ticket.png"))); // NOI18N
+        btQLPhieuPhat.setText(" QUẢN LÝ PHIẾU PHẠT");
+        btQLPhieuPhat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        btQLPhieuPhat.setBorderPainted(false);
+        btQLPhieuPhat.setFocusPainted(false);
+        btQLPhieuPhat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btQLPhieuPhat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btQLPhieuPhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btQLPhieuPhatActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MENU CHÍNH");
@@ -135,22 +183,6 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        btThongKe.setBackground(new java.awt.Color(27, 26, 67));
-        btThongKe.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btThongKe.setForeground(new java.awt.Color(255, 255, 255));
-        btThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconImages/chart.png"))); // NOI18N
-        btThongKe.setText(" THỐNG KÊ");
-        btThongKe.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btThongKe.setBorderPainted(false);
-        btThongKe.setFocusPainted(false);
-        btThongKe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btThongKe.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btThongKe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btThongKeActionPerformed(evt);
-            }
-        });
-
         btQLNhanVien.setBackground(new java.awt.Color(27, 26, 67));
         btQLNhanVien.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btQLNhanVien.setForeground(new java.awt.Color(255, 255, 255));
@@ -167,55 +199,24 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        btDanhMuc.setBackground(new java.awt.Color(27, 26, 67));
-        btDanhMuc.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btDanhMuc.setForeground(new java.awt.Color(255, 255, 255));
-        btDanhMuc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconImages/list.png"))); // NOI18N
-        btDanhMuc.setText("DANH MỤC");
-        btDanhMuc.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btDanhMuc.setBorderPainted(false);
-        btDanhMuc.setFocusPainted(false);
-        btDanhMuc.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btDanhMuc.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btDanhMuc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btDanhMucActionPerformed(evt);
-            }
-        });
-
-        btQLPhieuPhat.setBackground(new java.awt.Color(27, 26, 67));
-        btQLPhieuPhat.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btQLPhieuPhat.setForeground(new java.awt.Color(255, 255, 255));
-        btQLPhieuPhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconImages/ticket.png"))); // NOI18N
-        btQLPhieuPhat.setText(" QUẢN LÝ PHIẾU PHẠT");
-        btQLPhieuPhat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        btQLPhieuPhat.setBorderPainted(false);
-        btQLPhieuPhat.setFocusPainted(false);
-        btQLPhieuPhat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btQLPhieuPhat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btQLPhieuPhat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btQLPhieuPhatActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btQLSach, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btQLDocGia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btQLNhapHang, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-                    .addComponent(btQLNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btQLMuonTra, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btThongKe, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btDanhMuc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btQLPhieuPhat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btQLSach, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btQLNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btQLMuonTra, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btQLNhapHang, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(178, 178, 178)
+                        .addComponent(btQLDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -225,22 +226,17 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btQLSach)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btQLNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btQLPhieuPhat)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btQLMuonTra)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btQLDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btQLNhapHang)
-                    .addComponent(btThongKe))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btQLNhapHang)
+                            .addComponent(btQLNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(btQLDocGia, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(30, 29, 65));
